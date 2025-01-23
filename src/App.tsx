@@ -6,11 +6,12 @@ import Users from './components/Pages/UsersPage'
 import Posts from './components/Pages/PostsPage'
 import Registration from './components/Pages/RegistrationPage'
 import Login from './components/Pages/LoginPage'
+import Footer from './components/Footer/Footer'
 
 function App() {
 
   return (
-    <>
+    <div className="wrapper">
       <Header/>
       <main>
         <Routes>
@@ -21,7 +22,8 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </main>
-    </>
+      <Footer/>
+    </div>
   )
 }
 

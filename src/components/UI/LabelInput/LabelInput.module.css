@@ -1,0 +1,16 @@
+.labelInput {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.labelInput label {
+  font-size: 22px;
+  font-weight: 500;
+}
+.labelInput input {
+  padding: 10px 20px;
+  border: 1px solid var(--black);
+  border-radius: 20px;
+  font-size: 18px;
+}

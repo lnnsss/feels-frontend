@@ -8,6 +8,7 @@
   --maxWidth: 1240px;
   --white: #eff8ff;
   --grey: #abb4bb;
+  --mainColor: #a2add0;
   --black: #000000;
   --baseFontSize: 14px;
   --baseFontWeight: 300;
@@ -77,4 +78,7 @@ button:hover {
 button:active {
   filter: brightness(80%);
   transition: 0.2s;
+}
+::selection {
+  background-color: var(--mainColor);
 }
