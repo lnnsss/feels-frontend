@@ -1,8 +1,9 @@
 import React from "react"
+import { Login } from "../Login/Login"
 
 const LoginPage: React.FC = () => {
     return (
-        <h1>Вход</h1>
+        <Login />
     )
 }
 export default LoginPage

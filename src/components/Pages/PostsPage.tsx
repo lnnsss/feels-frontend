@@ -1,8 +1,9 @@
 import React from "react"
+import { Posts } from "../Posts/Posts"
 
 const PostsPage: React.FC = () => {
     return (
-        <h1>Посты</h1>
+        <Posts/>
     )
 }
 export default PostsPage

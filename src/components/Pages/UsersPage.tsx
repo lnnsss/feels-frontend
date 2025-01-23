@@ -1,8 +1,9 @@
 import React from "react"
+import { Users } from "../Users/Users"
 
 const UsersPage: React.FC = () => {
     return (
-        <h1>Пользователи</h1>
+        <Users />
     )
 }
 export default UsersPage
