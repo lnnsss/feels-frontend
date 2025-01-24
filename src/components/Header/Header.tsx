@@ -3,9 +3,11 @@ import s from './Header.module.css';
 import { Link } from 'react-router-dom';
 import HeaderStore from '../../stores/header-store';
 import { observer } from 'mobx-react-lite';
+import TokenStore from '../../stores/token-store';
 
 const Header: React.FC = observer(() => {
-  const { isMenuOpen, toggleMenu }= HeaderStore;
+  const { isMenuOpen, toggleMenu } = HeaderStore;
+  const { token } = TokenStore
 
   return (
     <header className={s.header}>
@@ -18,8 +20,18 @@ const Header: React.FC = observer(() => {
           <li className={s.header__navItem}><Link to="/" className={s.header__navLink}>Главная</Link></li>
           <li className={s.header__navItem}><Link to="/users" className={s.header__navLink}>Пользователи</Link></li>
           <li className={s.header__navItem}><Link to="/posts" className={s.header__navLink}>Посты</Link></li>
-          <li className={s.header__navItem}><Link to="/registration" className={s.header__navLink}>Регистрация</Link></li>
-          <li className={s.header__navItem}><Link to="/login" className={s.header__navLink}>Вход</Link></li>
+          {
+          token 
+          ? (
+            <li className={s.header__navItem}><Link to="/account" className={s.header__navLink}>Личный кабинет</Link></li>
+          )
+          : (
+            <>
+              <li className={s.header__navItem}><Link to="/registration" className={s.header__navLink}>Регистрация</Link></li>
+              <li className={s.header__navItem}><Link to="/login" className={s.header__navLink}>Вход</Link></li>
+            </>
+            )
+          }
         </ul>
       </nav>
     </header>

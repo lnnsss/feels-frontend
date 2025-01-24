@@ -6,3 +6,6 @@
   flex-direction: column;
   align-items: center;
 }
+.registration__link {
+  font-weight: 500;
+}

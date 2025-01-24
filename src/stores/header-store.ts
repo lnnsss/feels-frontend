@@ -7,7 +7,7 @@ class HeaderStore {
         makeAutoObservable(this)
     }
 
-    toggleMenu = () => {
+    toggleMenu = (): void => {
         this.isMenuOpen = !this.isMenuOpen
     }
 }

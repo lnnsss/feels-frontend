@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Main from './components/Pages/MainPage'
 import Users from './components/Pages/UsersPage'
@@ -7,6 +7,9 @@ import Posts from './components/Pages/PostsPage'
 import Registration from './components/Pages/RegistrationPage'
 import Login from './components/Pages/LoginPage'
 import Footer from './components/Footer/Footer'
+import Account from './components/Pages/AccountPage'
+import ProtectedRoute from './components/ProtectedRoute'
+import NotFound from './components/Pages/NotFoundPage'
 
 function App() {
 
@@ -23,8 +26,17 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/users" element={<Users />} />
           <Route path="/posts" element={<Posts />} />
-          <Route path="/registration" element={<Registration />} />
-          <Route path="/login" element={<Login />} />
+
+          <Route element={<ProtectedRoute isProtected={false} redirectTo="/account" />}>
+            <Route path="/registration" element={<Registration />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
+          <Route element={<ProtectedRoute isProtected={true} redirectTo="/registration" />}>
+            <Route path="/account" element={<Account />} />
+          </Route>
+
+          
+          <Route path="*" element={<NotFound />} />
         </Routes>
         </div>
       </main>

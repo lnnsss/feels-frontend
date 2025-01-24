@@ -4,12 +4,16 @@ import LabelInput from "../UI/LabelInput/LabelInput";
 import axios, { AxiosError } from "axios";
 import { apiURL } from "../../configs/constants";
 import Form from "../UI/Form/Form";
+import TokenStore from "../../stores/token-store";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login: React.FC = () => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const { setToken } = TokenStore;
+    const navigate = useNavigate();
 
     const handleBtnClick = () => {
         const login = async () => {
@@ -24,6 +28,8 @@ export const Login: React.FC = () => {
                 setPassword("")
                 setErrorMessage("")
                 setMessage(response.data.message)
+                setToken(response.data.token)
+                navigate('/account');
             } catch (err) {
                 const axiosError = err as AxiosError<{ message: string }>;
                 
@@ -46,6 +52,7 @@ export const Login: React.FC = () => {
                     <LabelInput element="email" text="Email" inputType="text" value={email} setValue={setEmail} />
                     <LabelInput element="password" text="Пароль" inputType="password" value={password} setValue={setPassword} />
                     <button onClick={handleBtnClick}>Войти</button>
+                    <h6>Еше нет аккаунта? <Link className={s.login__link} to="/registration">Зарегистрироваться</Link></h6>
                 </Form>
             </div>
         </div>

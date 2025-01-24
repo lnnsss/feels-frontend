@@ -4,6 +4,8 @@ import Form from "../UI/Form/Form";
 import LabelInput from "../UI/LabelInput/LabelInput";
 import axios, { AxiosError } from "axios";
 import {apiURL} from "../../configs/constants.ts"
+import TokenStore from "../../stores/token-store.ts";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Registration: React.FC = () => {
     const [email, setEmail] = useState<string>("")
@@ -11,6 +13,8 @@ export const Registration: React.FC = () => {
     const [userName, setUserName] = useState<string>("")
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const { setToken } = TokenStore;
+    const navigate = useNavigate();
 
     const handleBtnClick = () => {
         const reg = async () => {
@@ -27,6 +31,9 @@ export const Registration: React.FC = () => {
                 setUserName("")
                 setErrorMessage("")
                 setMessage(response.data.message)
+                setToken(response.data.token)
+                localStorage.setItem('jwt', response.data.token);
+                navigate('/account');
             } catch (err) {
                 const axiosError = err as AxiosError<{ message: string }>;
                 
@@ -50,6 +57,7 @@ export const Registration: React.FC = () => {
                     <LabelInput element="password" text="Пароль" inputType="password" value={password} setValue={setPassword} />
                     <LabelInput element="userName" text="Юзернейм" inputType="text" value={userName} setValue={setUserName} />
                     <button onClick={handleBtnClick}>Зарегистрироваться</button>
+                    <h6>Уже есть аккаунт? <Link className={s.registration__link} to="/login">Войти</Link></h6>
                 </Form>
             </div>
         </div>

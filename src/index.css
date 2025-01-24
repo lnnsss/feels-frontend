@@ -70,6 +70,9 @@ main {
   flex: 1;
   overflow: hidden;
 }
+img, button {
+  user-select: none;
+}
 button {
   cursor: pointer;
   transition: 0.5s;

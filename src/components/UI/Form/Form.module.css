@@ -11,6 +11,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  text-align: center;
 }
 .form__container h3 {
   font-size: 32px;
@@ -24,6 +25,9 @@
   font-size: 18px;
   font-weight: 400;
   color: red;
+}
+.form__container h6 {
+  font-size: 16px;
 }
 .form__container button {
   padding: 10px 40px;
