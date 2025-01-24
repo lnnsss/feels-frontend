@@ -1,0 +1,49 @@
+.starsTL,
+.starBR,
+.starsTR,
+.starsBL {
+  position: absolute;
+  z-index: 1;
+}
+.starsTL {
+  left: 0;
+  top: 0;
+}
+.starBR {
+  bottom: 0;
+  right: 0;
+}
+.starsTR {
+  right: 0;
+  top: 0;
+  display: none;
+}
+.starsBL {
+  bottom: 0;
+  left: 0;
+  display: none;
+}
+.main__container {
+  position: relative;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+/*----media-------------------------------------------*/
+
+@media (max-width: 768px) {
+  .starsTL,
+  .starBR {
+    display: none;
+  }
+  .starsBL,
+  .starsTR {
+    display: block;
+  }
+}

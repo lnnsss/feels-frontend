@@ -14,6 +14,11 @@ function App() {
     <div className="wrapper">
       <Header/>
       <main>
+        <img src="stars/starsTL.png" alt="starsTL" className="starsTL" />
+        <img src="stars/starsTR.png" alt="starsTR" className="starsTR" />
+        <img src="stars/starsBL.png" alt="starsBL" className="starsBL" />
+        <img src="stars/starBR.png" alt="starBR" className="starBR" />
+        <div className="main__container">
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/users" element={<Users />} />
@@ -21,6 +26,7 @@ function App() {
           <Route path="/registration" element={<Registration />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        </div>
       </main>
       <Footer/>
     </div>
