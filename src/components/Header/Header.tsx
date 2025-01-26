@@ -13,9 +13,9 @@ const Header: React.FC = observer(() => {
     <header className={s.header}>
       <div className={s.header__top}>
         <Link to="/" className={s.header__logo}>FEELS</Link>
+        <button className={s.header__burger} onClick={toggleMenu}><span></span><span></span><span></span></button>
       </div>
       <nav className={`${s.header__nav} ${isMenuOpen ? s.header__navOpen : ''}`}>
-        <button className={s.header__burger} onClick={toggleMenu}>Navigation</button>
         <ul className={s.header__navList}>
           <li className={s.header__navItem}><Link to="/" className={s.header__navLink}>Главная</Link></li>
           <li className={s.header__navItem}><Link to="/users" className={s.header__navLink}>Пользователи</Link></li>
