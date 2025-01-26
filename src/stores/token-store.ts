@@ -22,22 +22,28 @@ class TokenStore {
   };
 
   updateRoles = (): void => {
-    try {
-      const payload = JSON.parse(atob(this.token.split('.')[1]));
-      this.isAdmin = Array.isArray(payload.roles) && payload.roles.includes('ADMIN');
-    } catch (error) {
-      console.error("Ошибка при декодировании токена:", error);
-      this.isAdmin = false;
+    if (this.token) {
+      try {
+        const payload = JSON.parse(atob(this.token.split('.')[1]));
+        this.isAdmin = Array.isArray(payload.roles) && payload.roles.includes('ADMIN');
+      } catch (error) {
+        console.error("Ошибка при декодировании токена:", error);
+        this.isAdmin = false;
+      }
     }
   };
 
   hasRole = (role: string): boolean => {
-    try {
-      const payload = JSON.parse(atob(this.token.split('.')[1]));
-      return Array.isArray(payload.roles) && payload.roles.includes(role);
-    } catch (error) {
-      console.error("Ошибка при проверке роли:", error);
-      return false;
+    if (this.token) {
+      try {
+        const payload = JSON.parse(atob(this.token.split('.')[1]));
+        return Array.isArray(payload.roles) && payload.roles.includes(role);
+      } catch (error) {
+        console.error("Ошибка при проверке роли:", error);
+        return false;
+      }
+    } else {
+      return false
     }
   };
 }

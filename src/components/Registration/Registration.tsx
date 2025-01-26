@@ -19,21 +19,35 @@ export const Registration: React.FC = () => {
     const handleBtnClick = () => {
         const reg = async () => {
             try {
+
+                // тело запроса
                 const body = {
-                    email: email,
-                    password: password,
-                    userName: userName,
+                    email,
+                    password,
+                    userName,
                 }
+
+                // проверка на пустые поля
+                if (!email.trim() || !password.trim() || !userName.trim()) {
+                    return setErrorMessage("Все поля должны быть заполнены")
+                }
+
+                // запрос на сервер
                 const response = await axios.post(`${apiURL}/auth/registration`, body);
                 console.log(response.data);
+
+                // очистка полей
                 setEmail("")
                 setPassword("")
                 setUserName("")
                 setErrorMessage("")
+
+                // сохранение токена и ответа
                 setMessage(response.data.message)
                 setToken(response.data.token)
                 localStorage.setItem('jwt', response.data.token);
 
+                // переход на следующую страницу
                 const tokenPayload = JSON.parse(atob(response.data.token.split('.')[1]));
                 if (Array.isArray(tokenPayload.roles) && tokenPayload.roles.includes('ADMIN')) {
                     navigate('/admin'); 

@@ -18,18 +18,32 @@ export const Login: React.FC = () => {
     const handleBtnClick = () => {
         const login = async () => {
             try {
+
+                // тело запроса
                 const body = {
-                    email: email,
-                    password: password,
+                    email,
+                    password,
                 }
+
+                // проверка на пустые поля
+                if (!email.trim() || !password.trim()) {
+                    return setErrorMessage("Все поля должны быть заполнены")
+                }
+
+                // запрос на сервер
                 const response = await axios.post(`${apiURL}/auth/login`, body);
                 console.log(response.data);
+
+                // очистка полей
                 setEmail("")
                 setPassword("")
                 setErrorMessage("")
+
+                // сохранение токена и ответа
                 setMessage(response.data.message)
                 setToken(response.data.token)
 
+                // переход на следующую страницу
                 const tokenPayload = JSON.parse(atob(response.data.token.split('.')[1]));
                 if (Array.isArray(tokenPayload.roles) && tokenPayload.roles.includes('ADMIN')) {
                     navigate('/admin'); 
