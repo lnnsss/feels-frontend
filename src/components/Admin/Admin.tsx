@@ -1,10 +1,9 @@
-import React from "react";
-import s from "./Account.module.css"
-import TokenStore from "../../stores/token-store";
+import s from "./Admin.module.css";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
+import TokenStore from "../../stores/token-store";
 
-export const Account: React.FC = observer(() => {
+export const Admin: React.FC = observer(() => {
     const {clearToken} = TokenStore
     const navigate = useNavigate();
 
@@ -14,9 +13,9 @@ export const Account: React.FC = observer(() => {
     }      
 
     return (
-        <div className={s.account}>
-            <div className={`__container ${s.account__container}`}>
-                <h1>Личный кабинет</h1>
+        <div className={s.admin}>
+            <div className={`__container ${s.admin__container}`}>
+                <h1>админка</h1>
                 <button onClick={handleLogOut}>Выйти</button>
             </div>
         </div>

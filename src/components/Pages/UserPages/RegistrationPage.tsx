@@ -1,5 +1,5 @@
 import React from "react"
-import { Registration } from "../Registration/Registration"
+import { Registration } from "../../Registration/Registration"
 
 const RegistrationPage: React.FC = () => {
     return (

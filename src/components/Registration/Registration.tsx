@@ -33,7 +33,14 @@ export const Registration: React.FC = () => {
                 setMessage(response.data.message)
                 setToken(response.data.token)
                 localStorage.setItem('jwt', response.data.token);
-                navigate('/account');
+
+                const tokenPayload = JSON.parse(atob(response.data.token.split('.')[1]));
+                if (Array.isArray(tokenPayload.roles) && tokenPayload.roles.includes('ADMIN')) {
+                    navigate('/admin'); 
+                } else {
+                    navigate('/account');
+                }
+                
             } catch (err) {
                 const axiosError = err as AxiosError<{ message: string }>;
                 

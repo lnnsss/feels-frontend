@@ -1,5 +1,5 @@
 import React from 'react';
-import { NotFound } from '../NotFound/NotFound';
+import { NotFound } from '../../NotFound/NotFound';
 
 const NotFoundPage: React.FC = () => {
   return (

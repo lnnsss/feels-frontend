@@ -29,7 +29,14 @@ export const Login: React.FC = () => {
                 setErrorMessage("")
                 setMessage(response.data.message)
                 setToken(response.data.token)
-                navigate('/account');
+
+                const tokenPayload = JSON.parse(atob(response.data.token.split('.')[1]));
+                if (Array.isArray(tokenPayload.roles) && tokenPayload.roles.includes('ADMIN')) {
+                    navigate('/admin'); 
+                } else {
+                    navigate('/account');
+                }
+
             } catch (err) {
                 const axiosError = err as AxiosError<{ message: string }>;
                 
