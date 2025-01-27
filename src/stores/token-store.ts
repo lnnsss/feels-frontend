@@ -21,6 +21,18 @@ class TokenStore {
     this.isAdmin = false;
   };
 
+  getID = (): string | undefined => {
+    if (this.token) {
+      try {
+        const payload = JSON.parse(atob(this.token.split('.')[1]));
+        return payload._id
+      } catch (error) {
+        console.error("Ошибка при декодировании токена:", error);
+        return undefined
+      }
+    }
+  }
+
   updateRoles = (): void => {
     if (this.token) {
       try {

@@ -1,9 +1,15 @@
 import React from "react"
 import { Admin } from "../../Admin/Admin"
+import { Helmet } from "react-helmet"
 
 const AdminPage: React.FC = () => {
     return (
-        <Admin/>
+        <>
+            <Helmet>
+                <title>Админ панель</title>
+            </Helmet>
+            <Admin/>
+        </>
     )
 }
 
