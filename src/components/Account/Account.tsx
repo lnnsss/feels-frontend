@@ -31,8 +31,27 @@ export const Account: React.FC = observer(() => {
     return (
         <div className={s.account}>
             <div className={`__container ${s.account__container}`}>
-                <h1>Личный кабинет</h1>
-                <button onClick={handleLogOut}>Выйти</button>
+                <div className={s.account__left}>
+                    <button>Подписки</button>
+                    <button>Редактировать</button>
+                    <button onClick={handleLogOut}>Выйти</button>
+                </div>
+                <div className={s.account__right}>
+                    <div className={s.account__header}>
+                        <img className={s.account__avatar} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s" alt="avatar" />
+                        <h2 className={s.account__name}>Тимур Безбородников</h2>
+                        <h3 className={s.account__username}>@lnnsss</h3>
+                        <h3 className={s.account__status}>almost alive</h3>
+                        <h4 className={s.account__subscribes}>Подписки: 14</h4>
+                    </div>
+                    <div className={s.account__createPost}>
+                        <input type="text" />
+                        <button>Опубликовать</button>
+                    </div>
+                    <div className={s.account__posts}>
+                        <div className={s.account__post}></div>
+                    </div>
+                </div>
             </div>
         </div>
     )
