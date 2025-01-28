@@ -19,6 +19,11 @@ interface PostBodyProps {
 export const Account: React.FC = observer(() => {
     const [inputValue, setInputValue] = useState<string>("");
     const [name, setName] = useState<string>("");
+    const [lastName, setLastName] = useState<string>("");
+    const [userName, setUserName] = useState<string>("");
+    const [avatarURL, setAvatarURL] = useState<string>("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s");
+    const [status, setStatus] = useState<string>("");
+    const [subscriptions, setSubscriptions] = useState<string[]>([]);
     const [posts, setPosts] = useState<PostProps[]>([]);
     const { clearToken, getID } = TokenStore;
     const navigate = useNavigate();
@@ -29,7 +34,13 @@ export const Account: React.FC = observer(() => {
             try {
                 const accountResponse = await axios.get(`${apiURL}/users/${id}`);
                 const postsResponse = await axios.get(`${apiURL}/posts?userID=${id}`);
-                setName(accountResponse.data.content.name);
+                const { content } = accountResponse.data
+                setName(content.name);
+                setLastName(content.lastName);
+                setUserName(content.userName);
+                setAvatarURL(content.avatarURL);
+                setStatus(content.status);
+                setSubscriptions(content.subscriptions);
                 
                 const fetchedPosts = postsResponse.data.content.map((post: any) => ({
                     name,
@@ -104,11 +115,11 @@ export const Account: React.FC = observer(() => {
                 </div>
                 <div className={s.account__right}>
                     <div className={s.account__header}>
-                        <img className={s.account__avatar} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s" alt="avatar" />
-                        <h2 className={s.account__name}>{name}</h2>
-                        <h3 className={s.account__username}>@lnnsss</h3>
-                        <h3 className={s.account__status}>almost alive</h3>
-                        <h4 className={s.account__subscribes}>Подписки: 14</h4>
+                        <img className={s.account__avatar} src={avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s"} alt="avatar" />
+                        <h2 className={s.account__name}>{name} {lastName}</h2>
+                        <h3 className={s.account__username}>@{userName}</h3>
+                        <h3 className={s.account__status}>{status}</h3>
+                        <h4 className={s.account__subscribes}>Подписки: {subscriptions.length}</h4>
                     </div>
                     <div className={s.account__createPost}>
                         <input type="text" value={inputValue} onChange={handleChangeInputValue} />
