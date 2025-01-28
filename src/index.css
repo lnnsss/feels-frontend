@@ -84,6 +84,9 @@ button:active {
   filter: brightness(80%);
   transition: 0.2s;
 }
+.redOutline {
+  border-color: red;
+}
 ::selection {
   background-color: var(--mainColor);
   color: var(--black);

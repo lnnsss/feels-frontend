@@ -33,7 +33,6 @@
   filter: none;
 }
 .account__right {
-  padding: 0 40px;
   width: 75%;
   display: flex;
   flex-direction: column;
@@ -69,7 +68,8 @@
   font-weight: 500;
   color: var(--grey);
 }
-.account__username:hover, .account__username:active {
+.account__username:hover,
+.account__username:active {
   filter: none;
 }
 .account__status {
@@ -90,12 +90,15 @@
   border-radius: 20px;
   background-color: var(--white);
 }
-.account__createPost input {
+.account__createPost__input {
   padding: 10px;
   width: 100%;
   border: 2px solid var(--black);
   background-color: var(--white);
   border-radius: 20px;
+}
+.redOutline {
+  border-color: red;
 }
 .account__createPost button {
   padding: 10px 20px;
@@ -111,7 +114,11 @@
   flex-direction: column-reverse;
   align-items: center;
   gap: 10px;
-  background-color: var(--white);
+}
+.account__posts__empty {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--grey);
 }
 .account__post {
   padding: 10px 20px;
@@ -122,6 +129,7 @@
   border: 2px solid var(--black);
   border-radius: 20px;
   gap: 5px;
+  background-color: var(--white);
 }
 .account__post__header {
   width: 100%;
@@ -160,7 +168,7 @@
     flex-direction: column;
     gap: 10px;
   }
-  .account__createPost input {
+  .account__createPost__input {
     padding: 10px;
     width: 100%;
     border: 2px solid var(--black);
