@@ -65,10 +65,12 @@
   font-weight: 500;
 }
 .account__username {
-  cursor: pointer;
   font-size: 22px;
   font-weight: 500;
   color: var(--grey);
+}
+.account__username:hover, .account__username:active {
+  filter: none;
 }
 .account__status {
   font-size: 20px;
