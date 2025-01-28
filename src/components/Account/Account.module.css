@@ -55,7 +55,7 @@
 .account__avatar {
   width: 150px;
   height: 150px;
-  border: 1px solid var(--black);
+  border: 2px solid var(--black);
   border-radius: 50%;
   margin-bottom: 20px;
 }
@@ -144,7 +144,6 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  border: 2px solid var(--black);
   border-radius: 20px;
   gap: 5px;
   background-color: var(--white);

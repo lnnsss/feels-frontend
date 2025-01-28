@@ -4,6 +4,7 @@ interface Post {
     name: string;
     createdAt: string; 
     text: string;
+    color: string;
 }
 
 class PostStore {

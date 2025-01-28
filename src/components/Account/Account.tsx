@@ -8,12 +8,6 @@ import { CreatePost } from "./CreatePost";
 import UserStore from "../../stores/user-store";
 import { useAccountInfo } from "../../hooks/useAccountInfo";
 
-export interface PostProps {
-    name: string;
-    createdAt: string; 
-    text: string;
-}
-
 export const Account: React.FC = observer(() => {
     const { clearToken, getID } = TokenStore;
     const { name, lastName, userName, avatarURL, status, subscriptions } = UserStore;

@@ -5,7 +5,13 @@ import { apiURL } from "../../configs/constants";
 import axios from "axios";
 import TokenStore from "../../stores/token-store";
 import PostStore from "../../stores/post-store";
-import { PostProps } from "./Account";
+
+export interface PostProps {
+    name: string;
+    createdAt: string; 
+    text: string;
+    color: string;
+}
 
 interface PostBodyProps {
     userID: string | undefined;
@@ -31,6 +37,7 @@ export const CreatePost: React.FC = () => {
     // Обработка изменения цвета
     const handleChangeColorValue = (e: ChangeEvent<HTMLInputElement>): void => {
         setColorValue(e.target.value);
+        
     };
 
     // Добавление нового поста
@@ -49,6 +56,7 @@ export const CreatePost: React.FC = () => {
                     day: 'numeric',
                 }),
                 text: inputValue,
+                color: colorValue,
             };
 
             const body: PostBodyProps = {
@@ -58,7 +66,6 @@ export const CreatePost: React.FC = () => {
             };
 
             const response = await axios.post(`${apiURL}/posts`, body);
-            console.log(response);
 
             addPost(newPost);
             setInputValue("");

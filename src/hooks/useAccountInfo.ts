@@ -32,6 +32,7 @@ export const useAccountInfo = (id: string | undefined) => {
                         day: 'numeric',
                     }),
                     text: post.text,
+                    color: post.color
                 }));
                 setPosts(fetchedPosts);
             } catch (err) {
