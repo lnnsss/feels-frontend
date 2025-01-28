@@ -84,21 +84,39 @@
   padding: 10px;
   width: 100%;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: 20px;
   border: 2px solid var(--black);
   border-radius: 20px;
   background-color: var(--white);
 }
-.account__createPost__input {
+.account__createPost__inputs {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.account__createPost__textInput {
   padding: 10px;
   width: 100%;
   border: 2px solid var(--black);
   background-color: var(--white);
-  border-radius: 20px;
+  border-radius: 20px 0 0 20px;
 }
 .redOutline {
   border-color: red;
+}
+.account__createPost__colorInput {
+  border: 2px solid var(--black);
+  border-left: none;
+  height: 44px;
+  width: 44px;
+  border-radius: 0 20px 20px 0;
+}
+.account__createPost__colorInput::-webkit-color-swatch {
+  border: none;
+}
+.account__createPost__colorInput::-webkit-color-swatch-wrapper {
+  padding: 0;
 }
 .account__createPost button {
   padding: 10px 20px;
@@ -168,19 +186,10 @@
     flex-direction: column;
     gap: 10px;
   }
-  .account__createPost__input {
+  .account__createPost__textInput {
     padding: 10px;
-    width: 100%;
-    border: 2px solid var(--black);
-    background-color: var(--white);
-    border-radius: 20px;
   }
   .account__createPost button {
-    padding: 10px 20px;
-    border: 2px solid var(--black);
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 20px;
-    background-color: var(--white);
+    width: 100%;
   }
 }

@@ -8,6 +8,12 @@ import { CreatePost } from "./CreatePost";
 import UserStore from "../../stores/user-store";
 import { useAccountInfo } from "../../hooks/useAccountInfo";
 
+export interface PostProps {
+    name: string;
+    createdAt: string; 
+    text: string;
+}
+
 export const Account: React.FC = observer(() => {
     const { clearToken, getID } = TokenStore;
     const { name, lastName, userName, avatarURL, status, subscriptions } = UserStore;
@@ -17,10 +23,16 @@ export const Account: React.FC = observer(() => {
     // Получаем данные аккаунта
     useAccountInfo(id);
 
-    // Скопировать статус по нажатию
-    const handleStatusClick = async (): Promise<void> => {
-        await navigator.clipboard.writeText(status);
-    };
+    // Скопировать юзернейм по нажатию
+     const handleUserNameClick = async (): Promise<void> => {
+     try {
+         await navigator.clipboard.writeText(userName);
+         alert("Юзернейм скопирован в буфер обмена!");
+     } catch (err) {
+         console.error("Не удалось скопировать юзернейм: ", err);
+         alert("Не удалось скопировать юзернейм. Пожалуйста, скопируйте его вручную.");
+     }
+ };
 
     // Выход из аккаунта
     const handleLogOut = (): void => {
@@ -44,7 +56,7 @@ export const Account: React.FC = observer(() => {
                             alt="avatar"
                         />
                         <h2 className={s.account__name}>{name} {lastName}</h2>
-                        <button onClick={handleStatusClick} className={s.account__username}>@{userName}</button>
+                        <button onClick={handleUserNameClick} className={s.account__username}>@{userName}</button>
                         <h3 className={s.account__status}>{status}</h3>
                         <h4 className={s.account__subscribes}>Подписки: {subscriptions.length}</h4>
                     </div>

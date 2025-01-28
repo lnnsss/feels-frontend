@@ -1,73 +1,91 @@
 import { ChangeEvent, useState } from "react";
-import s from "./Account.module.css"
-import { PostProps } from "./Account";
+import s from "./Account.module.css";
 import UserStore from "../../stores/user-store";
 import { apiURL } from "../../configs/constants";
 import axios from "axios";
 import TokenStore from "../../stores/token-store";
 import PostStore from "../../stores/post-store";
+import { PostProps } from "./Account";
 
 interface PostBodyProps {
-    userID: string | undefined,
-    text: string
+    userID: string | undefined;
+    text: string;
+    color: string;
 }
 
 export const CreatePost: React.FC = () => {
-
     const [inputValue, setInputValue] = useState<string>("");
+    const [colorValue, setColorValue] = useState<string>("#000000");
     const [inputError, setInputError] = useState<boolean>(false);
-    const {name} = UserStore;
-    const { addPost } = PostStore
+    const { name } = UserStore;
+    const { addPost } = PostStore;
     const { getID } = TokenStore;
     const id = getID();
 
-    // Взаимодействие с полем ввода
+    // Обработка изменения текста
     const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>): void => {
         setInputValue(e.target.value);
-        setInputError(false)
-    }
+        setInputError(false);
+    };
 
-    // Добавить новый пост
-    const handleAddNewPost = (): void => {
+    // Обработка изменения цвета
+    const handleChangeColorValue = (e: ChangeEvent<HTMLInputElement>): void => {
+        setColorValue(e.target.value);
+    };
+
+    // Добавление нового поста
+    const handleAddNewPost = async (): Promise<void> => {
+        if (!inputValue.trim()) {
+            setInputError(true);
+            return;
+        }
+
         try {
-            const add = async (): Promise<void> => {
-                if (inputValue.trim()) {
-                    const newPost: PostProps = {
-                        name,
-                        createdAt: new Date().toLocaleString('ru-RU', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                        }),
-                        text: inputValue
-                    };
-            
-                    const body: PostBodyProps = {
-                        userID: id,
-                        text: inputValue
-                    };
-    
-                    const response = await axios.post(`${apiURL}/posts`, body)
-                            
-                    addPost(newPost)
-                    
-                    setInputValue("");
-                    setInputError(false)
-                    console.log(response);     
-                } else {
-                    setInputError(true)
-                }
-            }
-            add()
-        } catch(err) {
-            console.error(err);
+            const newPost: PostProps = {
+                name,
+                createdAt: new Date().toLocaleString('ru-RU', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                }),
+                text: inputValue,
+            };
+
+            const body: PostBodyProps = {
+                userID: id,
+                text: inputValue,
+                color: colorValue,
+            };
+
+            const response = await axios.post(`${apiURL}/posts`, body);
+            console.log(response);
+
+            addPost(newPost);
+            setInputValue("");
+            setInputError(false);
+        } catch (err) {
+            console.error("Ошибка при добавлении поста:", err);
         }
     };
 
     return (
         <div className={s.account__createPost}>
-            <input className={`${s.account__createPost__input} ${inputError && s.redOutline}`} type="text" value={inputValue} onChange={handleChangeInputValue} />
+            <div className={s.account__createPost__inputs}>
+                <input
+                    className={`${s.account__createPost__textInput} ${inputError && s.redOutline}`}
+                    type="text"
+                    value={inputValue}
+                    onChange={handleChangeInputValue}
+                    placeholder="Введите текст"
+                />
+                <input
+                    className={s.account__createPost__colorInput}
+                    type="color"
+                    value={colorValue}
+                    onChange={handleChangeColorValue}
+                />
+            </div>
             <button onClick={handleAddNewPost}>Опубликовать</button>
         </div>
-    )
-}
+    );
+};
