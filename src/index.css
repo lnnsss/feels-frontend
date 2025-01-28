@@ -86,4 +86,5 @@ button:active {
 }
 ::selection {
   background-color: var(--mainColor);
+  color: var(--black);
 }

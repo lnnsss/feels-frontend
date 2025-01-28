@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import s from "./Account.module.css"
 import TokenStore from "../../stores/token-store";
 import { observer } from "mobx-react-lite";
@@ -6,7 +6,20 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../../configs/constants";
 
+interface PostProps {
+    name: string;
+    date: string; 
+    text: string;
+}
+
+const posts: PostProps[] = [
+    {name: "Тимур", date: "26 января 2025", text: "in work"},
+    {name: "Тимур", date: "27 января 2025", text: "щас бы амняма из вкусноточки..."},
+    {name: "Тимур", date: "28 января 2025", text: "laptop boys 2 on the way"}
+]
+
 export const Account: React.FC = observer(() => {
+    const [inputValue, setInputValue] = useState("");
     const {clearToken, getID} = TokenStore
     const navigate = useNavigate();
     const id = getID();
@@ -28,6 +41,19 @@ export const Account: React.FC = observer(() => {
         navigate('/registration');
     }      
 
+    const handleChangeInputValue = (e: ChangeEvent<HTMLInputElement>): void => {
+        setInputValue(e.target.value)
+    }
+
+    const handleAddNewPost = (): void => {
+        const newPost = {
+            name: "Тимур",
+            date: "28 января 2025",
+            text: inputValue
+        }
+        posts.push(newPost)
+    }
+
     return (
         <div className={s.account}>
             <div className={`__container ${s.account__container}`}>
@@ -45,14 +71,26 @@ export const Account: React.FC = observer(() => {
                         <h4 className={s.account__subscribes}>Подписки: 14</h4>
                     </div>
                     <div className={s.account__createPost}>
-                        <input type="text" />
-                        <button>Опубликовать</button>
+                        <input type="text" value={inputValue} onChange={handleChangeInputValue} />
+                        <button onClick={handleAddNewPost}>Опубликовать</button>
                     </div>
                     <div className={s.account__posts}>
-                        <div className={s.account__post}></div>
+                        {posts.map( (p, i) => <Post key={i} name={p.name} date={p.date} text={p.text} />)}
                     </div>
                 </div>
             </div>
         </div>
     )
 })
+
+const Post = ({name, date, text}: PostProps) => {
+    return (
+        <div className={s.account__post}>
+            <div className={s.account__post__header}>
+                <h3 className={s.account__post__name}>{name}</h3>
+                <h4 className={s.account__post__date}>{date}</h4>
+            </div>
+            <p className={s.account__post__text}>{text}</p>
+        </div>
+    )
+}
