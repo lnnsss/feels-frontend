@@ -111,6 +111,7 @@
   height: 44px;
   width: 44px;
   border-radius: 0 20px 20px 0;
+  cursor: pointer;
 }
 .account__createPost__colorInput::-webkit-color-swatch {
   border: none;
@@ -147,6 +148,7 @@
   border-radius: 20px;
   gap: 5px;
   background-color: var(--white);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .account__post__header {
   width: 100%;

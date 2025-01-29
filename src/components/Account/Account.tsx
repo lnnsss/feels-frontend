@@ -3,14 +3,16 @@ import s from "./Account.module.css";
 import TokenStore from "../../stores/token-store";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
-import { Posts } from "./Posts";
-import { CreatePost } from "./CreatePost";
+import { Posts } from "./components/Posts";
+import { CreatePost } from "./components/CreatePost";
 import UserStore from "../../stores/user-store";
 import { useAccountInfo } from "../../hooks/useAccountInfo";
+import ModalStore from "../../stores/modal-store";
 
 export const Account: React.FC = observer(() => {
     const { clearToken, getID } = TokenStore;
     const { name, lastName, userName, avatarURL, status, subscriptions } = UserStore;
+    const { setEditingModalActive } = ModalStore
     const navigate = useNavigate();
     const id = getID();
 
@@ -39,7 +41,7 @@ export const Account: React.FC = observer(() => {
             <div className={`__container ${s.account__container}`}>
                 <div className={s.account__left}>
                     <button>Подписки</button>
-                    <button>Редактировать</button>
+                    <button onClick={setEditingModalActive}>Редактировать</button>
                     <button onClick={handleLogOut}>Выйти</button>
                 </div>
                 <div className={s.account__right}>

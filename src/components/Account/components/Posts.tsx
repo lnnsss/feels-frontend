@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
-import s from "./Account.module.css"
-import PostStore from "../../stores/post-store";
-import UserStore from "../../stores/user-store";
+import s from "./../Account.module.css"
+import PostStore from "../../../stores/post-store";
+import UserStore from "../../../stores/user-store";
 import { PostProps } from "./CreatePost";
 
 export const Posts: React.FC = observer( () => {

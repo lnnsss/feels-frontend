@@ -1,10 +1,10 @@
+import s from "./../Account.module.css";
 import { ChangeEvent, useState } from "react";
-import s from "./Account.module.css";
-import UserStore from "../../stores/user-store";
-import { apiURL } from "../../configs/constants";
 import axios from "axios";
-import TokenStore from "../../stores/token-store";
-import PostStore from "../../stores/post-store";
+import UserStore from "../../../stores/user-store";
+import { apiURL } from "../../../configs/constants";
+import TokenStore from "../../../stores/token-store";
+import PostStore from "../../../stores/post-store";
 
 export interface PostProps {
     name: string;
@@ -90,6 +90,7 @@ export const CreatePost: React.FC = () => {
                     type="color"
                     value={colorValue}
                     onChange={handleChangeColorValue}
+                    title="Цвет поста"
                 />
             </div>
             <button onClick={handleAddNewPost}>Опубликовать</button>

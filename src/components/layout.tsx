@@ -1,7 +1,7 @@
 import React from "react"
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import MainRoutes from './routes/MainRoutes'
+import Header from './Header/Header'
+import Footer from './Footer/Footer'
+import MainRoutes from '../routes/MainRoutes'
 
 const Layout: React.FC = () => {
     return (

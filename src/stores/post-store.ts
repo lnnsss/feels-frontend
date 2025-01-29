@@ -14,10 +14,10 @@ class PostStore {
         makeAutoObservable(this)
     }
 
-    setPosts = (newPosts: Post[]) => {
+    setPosts = (newPosts: Post[]): void => {
         this.posts = newPosts
     }
-    addPost = (newPost: Post) => {
+    addPost = (newPost: Post): void => {
         this.posts = [...this.posts, newPost]
     }
 }
