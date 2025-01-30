@@ -36,6 +36,9 @@ export const Account: React.FC = observer(() => {
         navigate('/registration');
     };
 
+    // Аватар пользователя
+    const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
+
     return (
         <div className={s.account}>
             <div className={`__container ${s.account__container}`}>
@@ -46,10 +49,9 @@ export const Account: React.FC = observer(() => {
                 </div>
                 <div className={s.account__right}>
                     <div className={s.account__header}>
-                        <img
-                            className={s.account__avatar}
-                            src={avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s"}
-                            alt="avatar"
+                        <div
+                            className={s.account__avatar} 
+                            style={{ backgroundImage: `url(${ava})` }}
                         />
                         <h2 className={s.account__name}>{name} {lastName}</h2>
                         <button onClick={handleUserNameClick} className={s.account__username}>@{userName}</button>
