@@ -16,7 +16,7 @@ const MainRoutes: React.FC = () => {
         <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/users" element={<Users />} />
-            <Route path="/users/:username" element={<Profile />} />
+            <Route path="/users/:userName" element={<Profile />} />
             <Route path="/posts" element={<Posts />} />
 
             {/* Публичные маршруты для регистрации и входа */}
