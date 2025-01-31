@@ -4,14 +4,7 @@ import UsersStore from "../../stores/users-store";
 import axios from "axios";
 import { apiURL } from "../../configs/constants";
 import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
-
-interface User {
-    userName: string,
-    name: string,
-    lastName: string,
-    avatarURL: string
-}
+import { User } from "./components/User";
 
 export const Users: React.FC = observer(() => {
     const [activeFilter, setActiveFilter] = useState("all");
@@ -37,6 +30,16 @@ export const Users: React.FC = observer(() => {
         fetch()
     }, [])    
 
+    // Фильтрация по введенным данным
+    const filteredUsers = users.filter(user => {
+        const searchTerm = inputValue.toLowerCase();
+        return (
+            user.userName.toLowerCase().includes(searchTerm) ||
+            user.name.toLowerCase().includes(searchTerm) ||
+            user.lastName.toLowerCase().includes(searchTerm)
+        );
+    });
+
     return (
         <div className={s.users}>
             <div className={`__container ${s.users__container}`}>
@@ -46,31 +49,12 @@ export const Users: React.FC = observer(() => {
                         <span></span>
                         <button className={activeFilter == "sub" ? s.active : ""} onClick={() => setActiveFilter("sub")}>Пользователи, на которых я подписан</button>
                     </div>
-                    <input type="text" value={inputValue} onChange={handleChangeInputValue} placeholder="Введите юзернейм" />
+                    <input type="text" value={inputValue} onChange={handleChangeInputValue} placeholder="Введите имя, фамилию или юзернейм" />
                 </div>
                 <div className={s.users__blocks}>
-                    {users.map( (u, i) => <User key={i} userName={u.userName} name={u.name} lastName={u.lastName} avatarURL={u.avatarURL} />)}
+                    {filteredUsers.map( (u, i) => <User key={i} userName={u.userName} name={u.name} lastName={u.lastName} avatarURL={u.avatarURL} />)}
                 </div>
             </div>
         </div>
-    )
-})
-
-const User: React.FC<User> = observer(({userName, name, lastName, avatarURL}) => {
-
-    // Аватар пользователя
-    const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
-
-    return (
-        <Link to={`/users/${userName}`} className={s.users__block}>
-            <div
-                className={s.users__block__avatar} 
-                style={{ backgroundImage: `url(${ava})` }}
-            />
-            <div className={s.users__block__text}>
-                <h3>{name} {lastName}</h3>
-                <h4>@{userName}</h4>
-            </div>
-        </Link>
     )
 })
