@@ -12,7 +12,7 @@ import ModalStore from "../../stores/modal-store";
 export const Account: React.FC = observer(() => {
     const { clearToken, getID } = TokenStore;
     const { name, lastName, userName, avatarURL, status, subscriptions } = UserStore;
-    const { setEditingModalActive, setAvatarModalActive } = ModalStore
+    const { setEditingModalActive, setAccountAvatarModalActive } = ModalStore
     const navigate = useNavigate();
     const id = getID();
 
@@ -52,7 +52,7 @@ export const Account: React.FC = observer(() => {
                         <div
                             className={s.account__avatar} 
                             style={{ backgroundImage: `url(${ava})` }}
-                            onClick={setAvatarModalActive}
+                            onClick={setAccountAvatarModalActive}
                         />
                         <h2 className={s.account__name}>{name} {lastName}</h2>
                         <button onClick={handleUserNameClick} className={s.account__username}>@{userName}</button>

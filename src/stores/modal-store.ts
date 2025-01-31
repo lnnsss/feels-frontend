@@ -3,7 +3,8 @@ import { makeAutoObservable } from "mobx";
 class ModalStore {
     isModalActive: boolean = false;
     isEditingModalActive: boolean = false; // Редактирование профиля
-    isAvatarModalActive: boolean = false; // Аватар 
+    isAccountAvatarModalActive: boolean = false; // Аватар личного кабинета
+    isProfileAvatarModalActive: boolean = false; // Аватар профиля
 
     constructor() {
         makeAutoObservable(this)
@@ -13,7 +14,8 @@ class ModalStore {
     closeModals = (): void => {
         this.isModalActive = false
         this.isEditingModalActive = false
-        this.isAvatarModalActive = false
+        this.isAccountAvatarModalActive = false
+        this.isProfileAvatarModalActive = false
     }
 
     // Открыть модальное окно редактирования профиля
@@ -22,10 +24,16 @@ class ModalStore {
         this.isEditingModalActive = true
     }
 
-    // Открыть модальное окно аватара
-    setAvatarModalActive = (): void => {
+    // Открыть модальное окно аватара личного кабинета
+    setAccountAvatarModalActive = (): void => {
         this.isModalActive = true
-        this.isAvatarModalActive = true
+        this.isAccountAvatarModalActive = true
+    }
+
+    // Открыть модальное окно аватара профиля
+    setProfileAvatarModalActive = (): void => {
+        this.isModalActive = true
+        this.isProfileAvatarModalActive = true
     }
 }
 

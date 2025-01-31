@@ -8,7 +8,7 @@ import { Posts } from "./components/Posts";
 
 export const Profile: React.FC = observer(() => {
     const { name, lastName, avatarURL, status, subscriptions } = ProfileStore;
-    const { setAvatarModalActive } = ModalStore;
+    const { setProfileAvatarModalActive } = ModalStore;
     const { userName } = useParams<{ userName: string }>();
 
     // Получаем данные аккаунта
@@ -39,7 +39,7 @@ export const Profile: React.FC = observer(() => {
                     <div
                         className={s.profile__avatar} 
                         style={{ backgroundImage: `url(${ava})` }}
-                        onClick={setAvatarModalActive}
+                        onClick={setProfileAvatarModalActive}
                     />
                     <h2 className={s.profile__name}>{name} {lastName}</h2>
                     <button onClick={handleUserNameClick} className={s.profile__username}>@{userName}</button>

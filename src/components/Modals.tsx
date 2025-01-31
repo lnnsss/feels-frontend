@@ -3,15 +3,17 @@ import Modal from "./UI/Modal/Modal";
 import ModalStore from "../stores/modal-store";
 import { observer } from "mobx-react-lite";
 import { EditingModal } from "./Account/components/EditingModal";
-import { AvatarModal } from "./Account/components/AvatarModal";
+import { AccountAvatarModal } from "./Account/components/AccountAvatarModal";
+import { ProfileAvatarModal } from "./Profile/components/ProfileAvatarModal";
 
 const Modals: React.FC = observer(() => {
-    const { isEditingModalActive, isAvatarModalActive } = ModalStore
+    const { isEditingModalActive, isAccountAvatarModalActive, isProfileAvatarModalActive } = ModalStore
 
     return (
         <Modal>
             {isEditingModalActive && <EditingModal />}
-            {isAvatarModalActive && <AvatarModal />}
+            {isAccountAvatarModalActive && <AccountAvatarModal />}
+            {isProfileAvatarModalActive && <ProfileAvatarModal />}
         </Modal>
     )
 })

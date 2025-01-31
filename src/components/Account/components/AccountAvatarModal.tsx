@@ -1,6 +1,6 @@
 import UserStore from "../../../stores/user-store"
 
-export const AvatarModal: React.FC = () => {
+export const AccountAvatarModal: React.FC = () => {
     const {avatarURL} = UserStore
 
     return (
