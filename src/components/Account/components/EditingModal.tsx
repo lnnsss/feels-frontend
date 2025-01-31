@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Form from "../../UI/Form/Form"
 import LabelInput from "../../UI/LabelInput/LabelInput"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { apiURL } from "../../../configs/constants"
 import TokenStore from "../../../stores/token-store"
 import ModalStore from "../../../stores/modal-store"
@@ -12,45 +12,49 @@ export const EditingModal: React.FC = () => {
     const [userName, setUserName] = useState<string>("")
     const [status, setStatus] = useState<string>("")
     const [avatarURL, setAvatarURL] = useState<string>("")
+    const [message, setMessage] = useState<string>("");
+    const [errorMessage, setErrorMessage] = useState<string>("");
     const { closeModals } = ModalStore    
     const { getID } = TokenStore;
     const id = getID();
 
     // Запрос на сервер
-    const handleChangeUserInfo = (): void => {
+    const handleChangeUserInfo = async (): Promise<void> => {
         try {
-            const fetch = async () => {
-
-                // Берем только непустые поля
-                const body = Object.fromEntries(
-                    Object.entries({
-                        name,
-                        lastName,
-                        userName,
-                        status,
-                        avatarURL,
-                    }).filter(([_, value]) => value.trim() !== "")
-                );                
-
-                const response = await axios.patch(`${apiURL}/users/${id}`, body)
-                console.log("Профиль успешно обновлён:", response.data);
-
-                setName("")
-                setLastName("")
-                setUserName("")
-                setStatus("")
-                setAvatarURL("")
-                closeModals()
-            }
-            fetch()
-        } catch(err) {
-            console.error("Ошибка при попытке редактирования профиля:", err);
-        }      
-    }
+            // Берем только непустые поля
+            const body = Object.fromEntries(
+                Object.entries({
+                    name,
+                    lastName,
+                    userName,
+                    status,
+                    avatarURL,
+                }).filter(([_, value]) => value.trim() !== "")
+            );
+    
+            const response = await axios.patch(`${apiURL}/users/${id}`, body);
+            setMessage(response.data.message);
+            console.log("Профиль успешно обновлён:", response.data);
+    
+            setName("");
+            setLastName("");
+            setUserName("");
+            setStatus("");
+            setAvatarURL("");
+            closeModals();
+        } catch (err) {
+            const axiosError = err as AxiosError<{ message: string }>;
+            setMessage("");
+            setErrorMessage(axiosError.response?.data.message || "Произошла ошибка при обновлении профиля.");
+            console.error(axiosError);
+        }
+    };
 
     return (
         <Form>
             <h3>Редактировать профиль</h3>
+            <h4>{message}</h4>
+            <h5>{errorMessage}</h5>
             <LabelInput element="name" text="Имя" inputType="text" value={name} setValue={setName} />
             <LabelInput element="lastName" text="Фамилия" inputType="text" value={lastName} setValue={setLastName} />
             <LabelInput element="userName" text="Юзернейм" inputType="text" value={userName} setValue={setUserName} />

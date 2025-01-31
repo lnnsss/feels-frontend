@@ -4,6 +4,7 @@ import UsersStore from "../../stores/users-store";
 import axios from "axios";
 import { apiURL } from "../../configs/constants";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 interface User {
     userName: string,
@@ -56,15 +57,20 @@ export const Users: React.FC = observer(() => {
 })
 
 const User: React.FC<User> = observer(({userName, name, lastName, avatarURL}) => {
+
+    // Аватар пользователя
+    const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
+
     return (
-        <div className={s.users__block}>
+        <Link to={`/users/${userName}`} className={s.users__block}>
             <div
                 className={s.users__block__avatar} 
-                style={{ backgroundImage: `url(${avatarURL})` }}
+                style={{ backgroundImage: `url(${ava})` }}
             />
-            <h3>{name}</h3>
-            <h3>{lastName}</h3>
-            <h4>{userName}</h4>
-        </div>
+            <div className={s.users__block__text}>
+                <h3>{name} {lastName}</h3>
+                <h4>@{userName}</h4>
+            </div>
+        </Link>
     )
 })

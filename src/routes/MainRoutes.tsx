@@ -8,6 +8,7 @@ import Login from '../components/Pages/UserPages/LoginPage';
 import Account from '../components/Pages/UserPages/AccountPage';
 import ProtectedRoute from '../components/ProtectedRoute';
 import NotFound from '../components/Pages/UserPages/NotFoundPage';
+import Profile from "../components/Pages/UserPages/ProfilePage";
 
 const MainRoutes: React.FC = () => {
 
@@ -15,6 +16,7 @@ const MainRoutes: React.FC = () => {
         <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/users" element={<Users />} />
+            <Route path="/users/:username" element={<Profile />} />
             <Route path="/posts" element={<Posts />} />
 
             {/* Публичные маршруты для регистрации и входа */}
