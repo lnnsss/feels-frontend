@@ -94,3 +94,25 @@
   font-size: 16px;
   text-align: justify;
 }
+.profile__button {
+  margin-top: 10px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  border: 2px solid var(--black);
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 20px;
+  background-color: var(--white);
+  transition: 0.2s;
+}
+.profile__button:hover {
+  font-weight: 700;
+  filter: none;
+}
+.profile__button:active {
+  background-color: var(--black);
+  color: var(--white);
+  filter: none;
+}

@@ -5,7 +5,7 @@ import ProfilePostStore from "../stores/profile-post-store";
 import ProfileStore from "../stores/profile-store";
 
 export const useProfileInfo = (userName: string | undefined) => {
-    const { setName, setLastName, setAvatarURL, setStatus, setSubscriptions } = ProfileStore;
+    const { setID, setName, setLastName, setAvatarURL, setStatus, setSubscriptions } = ProfileStore;
     const { setPosts } = ProfilePostStore;
 
     useEffect(() => {
@@ -18,7 +18,8 @@ export const useProfileInfo = (userName: string | undefined) => {
                     axios.get(`${apiURL}/posts?userName=${userName}`),
                 ]);
 
-                const { content } = accountResponse.data;
+                const { content } = accountResponse.data;          
+                setID(content._id)
                 setName(content.name);
                 setLastName(content.lastName);
                 setAvatarURL(content.avatarURL);
