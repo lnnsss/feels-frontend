@@ -12,7 +12,7 @@ import ModalStore from "../../stores/modal-store";
 export const Account: React.FC = observer(() => {
     const { clearToken, getID } = TokenStore;
     const { name, lastName, userName, avatarURL, status, subscriptions } = UserStore;
-    const { setEditingModalActive, setAccountAvatarModalActive } = ModalStore
+    const { setEditingModalActive, setAccountAvatarModalActive, setSubscribtionsModalActive } = ModalStore
     const navigate = useNavigate();
     const id = getID();
 
@@ -43,7 +43,7 @@ export const Account: React.FC = observer(() => {
         <div className={s.account}>
             <div className={`__container ${s.account__container}`}>
                 <div className={s.account__left}>
-                    <button>Подписки</button>
+                    <button onClick={setSubscribtionsModalActive}>Подписки</button>
                     <button onClick={setEditingModalActive}>Редактировать</button>
                     <button onClick={handleLogOut}>Выйти</button>
                 </div>

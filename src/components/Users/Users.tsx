@@ -47,7 +47,7 @@ export const Users: React.FC = observer(() => {
                     <div className={s.users__header__btns}>
                         <button className={activeFilter == "all" ? s.active : ""} onClick={() => setActiveFilter("all")}>Все пользователи</button>
                         <span></span>
-                        <button className={activeFilter == "sub" ? s.active : ""} onClick={() => setActiveFilter("sub")}>Пользователи, на которых я подписан</button>
+                        <button className={activeFilter == "sub" ? s.active : ""} onClick={() => setActiveFilter("sub")}>Подписки</button>
                     </div>
                     <input type="text" value={inputValue} onChange={handleChangeInputValue} placeholder="Введите имя, фамилию или юзернейм" />
                 </div>

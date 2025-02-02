@@ -65,7 +65,7 @@ export const CreatePost: React.FC = () => {
                 color: colorValue,
             };
 
-            const response = await axios.post(`${apiURL}/posts`, body);
+            await axios.post(`${apiURL}/posts`, body);
 
             addPost(newPost);
             setInputValue("");

@@ -4,7 +4,7 @@ import PostStore from "../../../stores/post-store";
 import UserStore from "../../../stores/user-store";
 import { PostProps } from "./CreatePost";
 
-export const Posts: React.FC = observer( () => {
+export const Posts: React.FC = observer(() => {
     const {posts} = PostStore
     const {name} = UserStore;
 

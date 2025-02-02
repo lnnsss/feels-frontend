@@ -56,7 +56,7 @@
 .users__block {
     width: 100%;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     gap: 20px;
     padding: 10px;
     border: 2px solid var(--black);
@@ -81,11 +81,11 @@
     flex-direction: column;
     align-items: start;
 }
-.users__block__text h3 {
+.users__block__name {
     font-size: 22px;
     font-weight: 600;
 }
-.users__block__text h4 {
+.users__block__userName {
     font-size: 18px;
     font-weight: 500;
     color: var(--grey);
@@ -103,7 +103,6 @@
         height: auto;
     }
     .users__header__btns button {
-        white-space: normal;
     }
     .users__header input {
         height: auto;
@@ -112,10 +111,13 @@
 
 @media (max-width: 768px) {
     .users__header__btns {
-        flex-direction: column;
+        gap: 10px;
     }
-    .users__header__btns span {
-        display: none;
+    .users__header__btns button {
+        font-size: 20px;
+    }
+    .users__header__btns button.active {
+        font-size: 22px;
     }
     .users__block {
         gap: 10px;
@@ -124,12 +126,23 @@
         width: 60px;
         height: 60px;
     }
-    .users__block__text h3 {
+    .users__block__name {
         font-size: 18px;
         font-weight: 500;
     }
-    .users__block__text h4 {
+    .users__block__userName {
         font-size: 14px;
         font-weight: 400;
+    }
+}
+@media (max-width: 480px) {
+    .users__header__btns {
+        gap: 5px;
+    }
+    .users__header__btns button {
+        font-size: 18px;
+    }
+    .users__header__btns button.active {
+        font-size: 20px;
     }
 }

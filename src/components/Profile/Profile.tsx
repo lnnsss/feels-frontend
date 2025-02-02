@@ -13,7 +13,8 @@ export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
     const { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions } = ProfileStore;
     const { setProfileAvatarModalActive } = ModalStore;
-    const ourID = TokenStore.getID()
+    const {getID, token} = TokenStore
+    const ourID = getID()
 
     // Fetch account data
     useProfileInfo(userName);
@@ -49,7 +50,7 @@ export const Profile: React.FC = observer(() => {
                     <button onClick={handleUserNameClick} className={s.profile__username}>@{userName}</button>
                     <h3 className={s.profile__status}>{status}</h3>
                     <h4 className={s.profile__subscribes}>Подписки: {profileSubscriptions.length}</h4>
-                    {ourID != id && <SubscribeButtons userId={id} />}
+                    {ourID != id && token && <SubscribeButtons userId={id} />}
                 </div>
                 <Posts />
             </div>

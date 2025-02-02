@@ -21,8 +21,8 @@ export const User: React.FC<User> = observer(({userName, name, lastName, avatarU
                 style={{ backgroundImage: `url(${ava})` }}
             />
             <div className={s.users__block__text}>
-                <h3>{name} {lastName}</h3>
-                <h4>@{userName}</h4>
+                <span className={s.users__block__name}>{name} {lastName}</span>
+                <span className={s.users__block__userName}>@{userName}</span>
             </div>
         </Link>
     )

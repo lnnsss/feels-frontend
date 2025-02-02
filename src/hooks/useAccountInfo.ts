@@ -26,11 +26,15 @@ export const useAccountInfo = (id: string | undefined) => {
 
                 const fetchedPosts = postsResponse.data.content.map((post: any) => ({
                     name: content.name,
-                    createdAt: new Date(post.createdAt).toLocaleString('ru-RU', {
+                    createdAt: `${new Date(post.createdAt).toLocaleDateString('ru-RU', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
-                    }),
+                    })} ${new Date(post.createdAt).toLocaleTimeString('ru-RU', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false, 
+                    })}`,
                     text: post.text,
                     color: post.color
                 }));

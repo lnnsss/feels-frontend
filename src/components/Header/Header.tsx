@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import s from './Header.module.css';
 import { Link } from 'react-router-dom';
 import HeaderStore from '../../stores/header-store';

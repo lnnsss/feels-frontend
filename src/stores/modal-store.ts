@@ -5,6 +5,7 @@ class ModalStore {
     isEditingModalActive: boolean = false; // Редактирование профиля
     isAccountAvatarModalActive: boolean = false; // Аватар личного кабинета
     isProfileAvatarModalActive: boolean = false; // Аватар профиля
+    isSubscribtionsModalActive: boolean = false; // Подписки
 
     constructor() {
         makeAutoObservable(this)
@@ -16,6 +17,7 @@ class ModalStore {
         this.isEditingModalActive = false
         this.isAccountAvatarModalActive = false
         this.isProfileAvatarModalActive = false
+        this.isSubscribtionsModalActive = false
     }
 
     // Открыть модальное окно редактирования профиля
@@ -34,6 +36,12 @@ class ModalStore {
     setProfileAvatarModalActive = (): void => {
         this.isModalActive = true
         this.isProfileAvatarModalActive = true
+    }
+
+    // Открыть модальное окно подписок
+    setSubscribtionsModalActive = (): void => {
+        this.isModalActive = true
+        this.isSubscribtionsModalActive = true
     }
 }
 
