@@ -5,34 +5,23 @@ import s from "./Profile.module.css";
 import { useProfileInfo } from "../../hooks/useProfileInfo";
 import { observer } from "mobx-react-lite";
 import { Posts } from "./components/Posts";
-import UserStore from "../../stores/user-store";
-import { useEffect, useState } from "react";
-import useSubscription from "../../hooks/useSubscription";
+import React from "react";
+import { SubscribeButtons } from "./components/SubscribeButtons";
+import TokenStore from "../../stores/token-store";
 
 export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
     const { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions } = ProfileStore;
-    const { subscriptions: userSubscriptions } = UserStore;
     const { setProfileAvatarModalActive } = ModalStore;
-    const [isSubscribed, setIsSubscribed] = useState<boolean>(false); // Изначально false
+    const ourID = TokenStore.getID()
 
-    // Получаем данные аккаунта
+    // Fetch account data
     useProfileInfo(userName);
 
-    // Проверяем подписаны ли мы на пользователя
-    useEffect(() => {
-        if (id) {
-            setIsSubscribed(userSubscriptions.includes(id));
-        }
-    }, [userSubscriptions, id]);
-
-    // Аватар пользователя
+    // User avatar
     const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
 
-    // Подписка / отписка
-    const { handleSubscribeUser, handleUnsubscribeUser } = useSubscription(id);
-
-    // Скопировать юзернейм по нажатию
+    // Copy username to clipboard
     const handleUserNameClick = async (): Promise<void> => {
         if (!userName) {
             alert("Юзернейм не найден.");
@@ -60,11 +49,7 @@ export const Profile: React.FC = observer(() => {
                     <button onClick={handleUserNameClick} className={s.profile__username}>@{userName}</button>
                     <h3 className={s.profile__status}>{status}</h3>
                     <h4 className={s.profile__subscribes}>Подписки: {profileSubscriptions.length}</h4>
-                    {
-                        isSubscribed
-                        ? <button className={s.profile__button} onClick={() => { handleUnsubscribeUser(); setIsSubscribed(false); }}>Отписаться</button>
-                        : <button className={s.profile__button} onClick={() => { handleSubscribeUser(); setIsSubscribed(true); }}>Подписаться</button>
-                    }
+                    {ourID != id && <SubscribeButtons userId={id} />}
                 </div>
                 <Posts />
             </div>
