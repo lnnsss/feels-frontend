@@ -5,11 +5,13 @@ import axios from "axios";
 import { apiURL } from "../../configs/constants";
 import { observer } from "mobx-react-lite";
 import { User } from "./components/User";
+import TokenStore from "../../stores/token-store";
 
 export const Users: React.FC = observer(() => {
     const [activeFilter, setActiveFilter] = useState("all");
     const [inputValue, setInputValue] = useState("");
     const { users, setUsers } = UsersStore;
+    const id = TokenStore.getID()
 
     // Поле ввода
     const handleChangeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,15 +22,21 @@ export const Users: React.FC = observer(() => {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get(`${apiURL}/users`)
-                setUsers(response.data.content)
-                console.log(response.data.message, response.data.content);                
+                if (activeFilter == "sub") {
+                    const response = await axios.get(`${apiURL}/users/${id}/subscriptions`)
+                    setUsers(response.data.content)
+                    console.log(response.data.message, response.data.content);  
+                } else {
+                    const response = await axios.get(`${apiURL}/users`)
+                    setUsers(response.data.content)
+                    console.log(response.data.message, response.data.content);   
+                }             
             } catch(err){
                 console.error("Ошибка при получении пользователей", err);
             }
         }
         fetch()
-    }, [])    
+    }, [activeFilter])    
 
     // Фильтрация по введенным данным
     const filteredUsers = users.filter(user => {
@@ -52,7 +60,10 @@ export const Users: React.FC = observer(() => {
                     <input type="text" value={inputValue} onChange={handleChangeInputValue} placeholder="Введите имя, фамилию или юзернейм" />
                 </div>
                 <div className={s.users__blocks}>
-                    {filteredUsers.map( (u, i) => <User key={i} userName={u.userName} name={u.name} lastName={u.lastName} avatarURL={u.avatarURL} />)}
+                    {filteredUsers.length > 0
+                    ? filteredUsers.map( (u, i) => <User key={i} userName={u.userName} name={u.name} lastName={u.lastName} avatarURL={u.avatarURL} />)
+                    : <span className={s.users__empty}>Нету пользователей</span>
+                }
                 </div>
             </div>
         </div>

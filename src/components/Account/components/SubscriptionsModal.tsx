@@ -3,7 +3,9 @@ import { observer } from "mobx-react-lite";
 import UserStore from "../../../stores/user-store";
 import Form from "../../UI/Form/Form";
 import { User } from "../../Users/components/User";
-import { fetchUsersByIds } from "../../../services/fetchUsersByIds";
+import axios from "axios";
+import { apiURL } from "../../../configs/constants";
+import TokenStore from "../../../stores/token-store";
 
 interface User {
   userName: string;
@@ -16,13 +18,14 @@ export const SubscriptionsModal: React.FC = observer(() => {
   const { subscriptions } = UserStore; 
   const [subs, setSubs] = useState<User[]>([]); 
   const [loading, setLoading] = useState<boolean>(true); 
+  const id = TokenStore.getID()
 
   useEffect(() => {
     const loadUsers = async () => {
       try {
         if (subscriptions.length > 0) {
-          const users = await fetchUsersByIds(subscriptions);
-          setSubs(users);
+          const response = await axios.get(`${apiURL}/users/${id}/subscriptions`)
+          setSubs(response.data.content);
         }
       } catch (error) {
         console.error("Не удалось загрузить подписанных пользователей:", error);
