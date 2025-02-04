@@ -5,6 +5,7 @@ import axios, { AxiosError } from "axios"
 import { apiURL } from "../../../configs/constants"
 import TokenStore from "../../../stores/token-store"
 import ModalStore from "../../../stores/modal-store"
+import UserStore from "../../../stores/user-store"
 
 export const EditingModal: React.FC = () => {
     const [name, setName] = useState<string>("")
@@ -14,9 +15,19 @@ export const EditingModal: React.FC = () => {
     const [avatarURL, setAvatarURL] = useState<string>("")
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const { setName: setNameUser, setLastName: setLastNameUser, setUserName: setUserNameUser, setAvatarURL: setAvatarURLUser, setStatus: setStatusUser } = UserStore
     const { closeModals } = ModalStore    
     const { getID } = TokenStore;
     const id = getID();
+
+    // Очистка полей
+    const clearInputs = () => {
+        setName("");
+        setLastName("");
+        setUserName("");
+        setStatus("");
+        setAvatarURL("");
+    }
 
     // Запрос на сервер
     const handleChangeUserInfo = async (): Promise<void> => {
@@ -35,12 +46,15 @@ export const EditingModal: React.FC = () => {
             const response = await axios.patch(`${apiURL}/users/${id}`, body);
             setMessage(response.data.message);
             console.log("Профиль успешно обновлён:", response.data);
+
+            // Обновляем профиль значениями из непустых полей
+            if (body.name) setNameUser(body.name);
+            if (body.lastName) setLastNameUser(body.lastName);
+            if (body.userName) setUserNameUser(body.userName);
+            if (body.status) setStatusUser(body.status);
+            if (body.avatarURL) setAvatarURLUser(body.avatarURL);
     
-            setName("");
-            setLastName("");
-            setUserName("");
-            setStatus("");
-            setAvatarURL("");
+            clearInputs();
             closeModals();
         } catch (err) {
             const axiosError = err as AxiosError<{ message: string }>;

@@ -50,11 +50,15 @@ export const CreatePost: React.FC = () => {
         try {
             const newPost: PostProps = {
                 name,
-                createdAt: new Date().toLocaleString('ru-RU', {
+                createdAt: `${new Date().toLocaleDateString('ru-RU', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
-                }),
+                })} ${new Date().toLocaleTimeString('ru-RU', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false,
+                })}`,
                 text: inputValue,
                 color: colorValue,
             };

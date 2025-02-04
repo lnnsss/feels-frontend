@@ -6,7 +6,7 @@ const LoginPage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Войти</title>
+                <title>Вход</title>
             </Helmet>
             <Login />
         </>
