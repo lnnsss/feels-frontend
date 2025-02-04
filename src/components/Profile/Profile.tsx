@@ -16,13 +16,13 @@ export const Profile: React.FC = observer(() => {
     const {getID, token} = TokenStore
     const ourID = getID()
 
-    // Fetch account data
+    // Получение данных пользователя
     useProfileInfo(userName);
 
-    // User avatar
+    // Аватар
     const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
 
-    // Copy username to clipboard
+    // Копировать юзернейм нажатием
     const handleUserNameClick = async (): Promise<void> => {
         if (!userName) {
             alert("Юзернейм не найден.");

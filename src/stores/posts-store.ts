@@ -1,7 +1,13 @@
 import { makeAutoObservable } from "mobx";
 
-interface Post {
+interface UserInfo {
+    userName: string;
     name: string;
+    lastName: string;
+}
+
+interface Post {
+    userID: UserInfo
     createdAt: string; 
     text: string;
     color: string;
