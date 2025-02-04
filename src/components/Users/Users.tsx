@@ -22,15 +22,20 @@ export const Users: React.FC = observer(() => {
     useEffect(() => {
         const fetch = async () => {
             try {
-                if (activeFilter == "sub") {
-                    const response = await axios.get(`${apiURL}/users/${id}/subscriptions`)
-                    setUsers(response.data.content)
-                    console.log(response.data.message, response.data.content);  
-                } else {
+                if (activeFilter == "sub") { // получаем пользователей, на которых пользователь подписан
+                    if (id) { // проверяем авторизован ли пользователь
+                        const response = await axios.get(`${apiURL}/users/${id}/subscriptions`)
+                        setUsers(response.data.content)
+                        console.log(response.data.message, response.data.content);  
+                    } else {
+                        setUsers([])
+                        console.log("Пользователь не авторизован"); 
+                    }
+                } else { // получаем всех пользователей
                     const response = await axios.get(`${apiURL}/users`)
                     setUsers(response.data.content)
                     console.log(response.data.message, response.data.content);   
-                }             
+                } 
             } catch(err){
                 console.error("Ошибка при получении пользователей", err);
             }

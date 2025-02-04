@@ -24,11 +24,11 @@ export const Registration: React.FC = () => {
 
                 // тело запроса (форматирование имени, фамилии)
                 const body = {
-                    name: name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(),
-                    lastName: lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase(),
-                    email,
-                    password,
-                    userName
+                    name: (name.trim().charAt(0).toUpperCase() + name.trim().slice(1).toLowerCase()).trim(),
+                    lastName: (lastName.trim().charAt(0).toUpperCase() + lastName.trim().slice(1).toLowerCase()).trim(),
+                    email: email.trim(), 
+                    password: password.trim(), 
+                    userName: userName.trim()
                 };
 
                 // проверка на пустые поля
