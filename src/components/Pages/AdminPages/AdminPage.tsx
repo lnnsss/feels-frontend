@@ -6,7 +6,7 @@ const AdminPage: React.FC = () => {
     return (
         <>
             <Helmet>
-                <title>Админ панель</title>
+                <title>Админка</title>
             </Helmet>
             <Admin/>
         </>

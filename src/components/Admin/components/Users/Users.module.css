@@ -1,0 +1,8 @@
+.users {
+  width: 100%;
+}
+.users__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

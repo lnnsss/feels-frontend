@@ -1,0 +1,8 @@
+.posts {
+  width: 100%;
+}
+.posts__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
