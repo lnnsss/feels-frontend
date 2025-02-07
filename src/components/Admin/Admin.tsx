@@ -7,7 +7,7 @@ export const Admin: React.FC = observer(() => {
     return (
         <div className={s.admin}>
             <div className={`__container ${s.admin__container}`}>
-                админка
+                <h2>админка</h2>
             </div>
         </div>
     )

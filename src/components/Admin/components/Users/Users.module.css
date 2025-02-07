@@ -5,4 +5,158 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 40px;
+}
+.users__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  height: 50px;
+}
+.users__header__btns {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+}
+.users__header__btns button {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--grey);
+  white-space: nowrap;
+}
+.users__header__btns button.active {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--black);
+}
+.users__header__btns span {
+  width: 2px;
+  height: 100%;
+  background-color: var(--black);
+}
+.users__header input {
+  height: 100%;
+  padding: 10px 20px;
+  border: 2px solid var(--black);
+  border-radius: 20px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: var(--white);
+}
+.users__blocks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.users__block {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  border: 2px solid var(--black);
+  border-radius: 20px;
+  background-color: var(--white);
+}
+.users__block__avatar {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid var(--black);
+  border-radius: 50%;
+}
+.users__block__text {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.users__block__name {
+  font-size: 22px;
+  font-weight: 600;
+}
+.users__block__userName {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--grey);
+}
+.users__empty {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--grey);
+}
+
+/*----media-------------------------------------------*/
+
+@media (max-width: 1040px) {
+  .users__header {
+    height: auto;
+    flex-direction: column;
+  }
+  .users__header__btns {
+    height: auto;
+  }
+  .users__header__btns button {
+  }
+  .users__header input {
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .users__header__btns {
+    gap: 10px;
+  }
+  .users__header__btns button {
+    font-size: 20px;
+  }
+  .users__header__btns button.active {
+    font-size: 22px;
+  }
+  .users__block {
+    gap: 10px;
+  }
+  .users__block__avatar {
+    width: 60px;
+    height: 60px;
+  }
+  .users__block__name {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .users__block__userName {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .users__empty {
+    font-size: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .users__header__btns {
+    gap: 5px;
+  }
+  .users__header__btns button {
+    font-size: 18px;
+  }
+  .users__header__btns button.active {
+    font-size: 20px;
+  }
+  .users__empty {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .users__header input {
+    font-size: 14px;
+  }
 }

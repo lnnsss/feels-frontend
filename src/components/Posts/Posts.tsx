@@ -12,7 +12,8 @@ export interface UserInfo {
 }
 
 export interface PostProps {
-    userID: UserInfo
+    _id?: string;
+    userID: UserInfo;
     createdAt: string; 
     text: string;
     color: string;

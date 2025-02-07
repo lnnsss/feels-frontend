@@ -14,6 +14,7 @@ export const usePosts = () => {
 
                 if ( response.data.content && response.data.content.length > 0) {
                     const fetchedPosts = response.data.content.map((post: PostProps) => ({
+                        id: post._id,
                         userID: post.userID,
                         createdAt: `${new Date(post.createdAt).toLocaleDateString('ru-RU', {
                             year: 'numeric',

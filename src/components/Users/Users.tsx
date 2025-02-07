@@ -13,11 +13,6 @@ export const Users: React.FC = observer(() => {
     const { users, setUsers } = UsersStore;
     const id = TokenStore.getID()
 
-    // Поле ввода
-    const handleChangeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value)
-    }
-
     // Запрос на сервер
     useEffect(() => {
         const fetch = async () => {
@@ -42,6 +37,11 @@ export const Users: React.FC = observer(() => {
         }
         fetch()
     }, [activeFilter])    
+
+    // Поле ввода
+    const handleChangeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value)
+    }
 
     // Фильтрация по введенным данным
     const filteredUsers = users.filter(user => {
