@@ -23,6 +23,7 @@ const Header: React.FC = observer(() => {
           </div>
           <nav className={`${s.header__nav} ${isMenuOpen ? s.header__navOpen : ''}`}>
             <ul className={s.header__navList}>
+              <li className={s.header__navItem}><Link to="/admin" className={s.header__navLink}>Главная</Link></li>
               <li className={s.header__navItem}><Link to="/admin/users" className={s.header__navLink}>Пользователи</Link></li>
               <li className={s.header__navItem}><Link to="/admin/posts" className={s.header__navLink}>Посты</Link></li>
               <li className={s.header__navItem}><button className={s.header__navLink} onClick={handleLogOut}>Выйти</button></li>

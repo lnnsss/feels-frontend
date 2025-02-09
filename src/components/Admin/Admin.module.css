@@ -6,3 +6,37 @@
   flex-direction: column;
   align-items: center;
 }
+.admin__statistics {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+}
+.admin__statistic {
+  padding: 20px;
+  border: 2px solid var(--black);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+.admin__statistic__title {
+  font-size: 24px;
+  font-weight: 500;
+}
+.admin__statistic__count {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/*----media-------------------------------------------*/
+
+@media (max-width: 768px) {
+  .admin__statistics {
+    flex-direction: column;
+  }
+  .admin__statistic {
+    width: 100%;
+  }
+}
