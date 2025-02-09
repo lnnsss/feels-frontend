@@ -5,4 +5,122 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
+}
+.profile__header {
+  padding: 40px 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  border: 2px solid var(--black);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--white);
+}
+.profile__avatar {
+  width: 150px;
+  height: 150px;
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.profile__name {
+  font-size: 32px;
+  font-weight: 500;
+}
+.profile__username {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--grey);
+}
+.profile__username:hover,
+.profile__username:active {
+  filter: none;
+}
+.profile__status {
+  font-size: 20px;
+  font-weight: 500;
+}
+.profile__subscribes {
+  font-size: 14px;
+  font-weight: 500;
+}
+.profile__posts {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 10px;
+}
+.profile__posts__empty {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--grey);
+}
+.profile__post {
+  padding: 10px 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border-radius: 20px;
+  gap: 5px;
+  background-color: var(--white);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.profile__post__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile__post__name {
+  font-size: 20px;
+  font-weight: 500;
+}
+.profile__post__date {
+  color: var(--grey);
+}
+.profile__post__text {
+  font-size: 16px;
+  text-align: justify;
+}
+.profile__buttons {
+  width: 100%;
+  gap: 10px;
+  display: flex;
+}
+
+.profile__button {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  border: 2px solid var(--black);
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 20px;
+  background-color: var(--white);
+  transition: 0.2s;
+  flex-grow: 1; 
+}
+
+.profile__button:hover {
+  font-weight: 700;
+  filter: none;
+}
+.profile__button:active {
+  background-color: var(--black);
+  color: var(--white);
+  filter: none;
 }

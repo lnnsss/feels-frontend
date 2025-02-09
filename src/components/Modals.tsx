@@ -6,13 +6,15 @@ import { EditingModal } from "./Account/components/EditingModal";
 import { AccountAvatarModal } from "./Account/components/AccountAvatarModal";
 import { ProfileAvatarModal } from "./Profile/components/ProfileAvatarModal";
 import { SubscriptionsModal } from "./Account/components/SubscriptionsModal";
+import { ProfileEditModal } from "./Admin/components/Profile/components/ProfileEditModal";
 
 const Modals: React.FC = observer(() => {
-    const { isEditingModalActive, isAccountAvatarModalActive, isProfileAvatarModalActive, isSubscribtionsModalActive } = ModalStore
+    const { isEditingModalActive, isProfileEditModalActive, isAccountAvatarModalActive, isProfileAvatarModalActive, isSubscribtionsModalActive, profileEditUserId } = ModalStore
 
     return (
         <Modal>
             {isEditingModalActive && <EditingModal />}
+            {isProfileEditModalActive && profileEditUserId && ( <ProfileEditModal id={profileEditUserId} /> )}
             {isAccountAvatarModalActive && <AccountAvatarModal />}
             {isProfileAvatarModalActive && <ProfileAvatarModal />}
             {isSubscribtionsModalActive && <SubscriptionsModal />}
