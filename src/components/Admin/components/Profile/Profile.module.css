@@ -99,7 +99,6 @@
   gap: 10px;
   display: flex;
 }
-
 .profile__button {
   margin-top: 10px;
   display: flex;
@@ -114,7 +113,6 @@
   transition: 0.2s;
   flex-grow: 1; 
 }
-
 .profile__button:hover {
   font-weight: 700;
   filter: none;
@@ -123,4 +121,12 @@
   background-color: var(--black);
   color: var(--white);
   filter: none;
+}
+
+/*----media-------------------------------------------*/
+
+@media (max-width: 768px) {
+  .profile__buttons {
+    flex-direction: column;
+  }
 }

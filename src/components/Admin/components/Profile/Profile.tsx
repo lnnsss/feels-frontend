@@ -1,15 +1,18 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ModalStore from "../../../../stores/modal-store";
 import ProfileStore from "../../../../stores/profile-store";
 import s from "./Profile.module.css";
 import { useProfileInfo } from "../../../../hooks/useProfileInfo";
 import { observer } from "mobx-react-lite";
 import React from "react";
+import axios from "axios";
+import { apiURL } from "../../../../configs/constants";
 
 export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
     const { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions } = ProfileStore;
     const { setProfileAvatarModalActive, setProfileEditModalActive } = ModalStore;
+    const navigate = useNavigate();
 
     // Получение данных пользователя
     useProfileInfo(userName);
@@ -32,6 +35,18 @@ export const Profile: React.FC = observer(() => {
         }
     };
 
+    // Удаление пользователя
+    const handleDeleteUser = async (): Promise<void> => {
+        try {
+            await axios.delete(`${apiURL}/users/${id}`);
+            console.log("Пользователь успешно удален!");
+            alert("Пользователь успешно удален!");
+            navigate('/admin/users');
+        } catch (err) {
+            console.error("Ошибка при попытке удалить пользователя: ", err);
+        }
+    }
+
     return (
         <div className={s.profile}>
             <div className={`__container ${s.profile__container}`}>
@@ -49,7 +64,7 @@ export const Profile: React.FC = observer(() => {
                 <div className={s.profile__buttons}>
                     <button className={s.profile__button}>Посты</button>
                     <button className={s.profile__button} onClick={() => setProfileEditModalActive(id)}>Редактировать</button>
-                    <button className={s.profile__button}>Удалить</button>
+                    <button className={s.profile__button} onClick={handleDeleteUser}>Удалить</button>
                 </div>
             </div>
         </div>
