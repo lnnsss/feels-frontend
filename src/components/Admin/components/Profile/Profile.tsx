@@ -7,6 +7,8 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import axios from "axios";
 import { apiURL } from "../../../../configs/constants";
+import { Posts } from "./components/Posts";
+
 
 export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
@@ -62,10 +64,10 @@ export const Profile: React.FC = observer(() => {
                     <h4 className={s.profile__subscribes}>Подписки: {profileSubscriptions.length}</h4>
                 </div>
                 <div className={s.profile__buttons}>
-                    <button className={s.profile__button}>Посты</button>
                     <button className={s.profile__button} onClick={() => setProfileEditModalActive(id)}>Редактировать</button>
                     <button className={s.profile__button} onClick={handleDeleteUser}>Удалить</button>
                 </div>
+                <Posts id={id} />
             </div>
         </div>
     );

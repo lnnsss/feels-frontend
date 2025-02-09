@@ -4,13 +4,18 @@ import { apiURL } from "../configs/constants";
 import PostsStore from "../stores/posts-store";
 import { PostProps } from "../components/Posts/Posts";
 
-export const usePosts = () => {
+export const usePosts = (id?: string) => {
     const { setPosts } = PostsStore;
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get(`${apiURL}/posts/all`)
+                let response 
+                if (id) {
+                    response = await axios.get(`${apiURL}/posts?userID=${id}`)
+                } else {
+                    response = await axios.get(`${apiURL}/posts/all`)
+                }
 
                 if ( response.data.content && response.data.content.length > 0) {
                     const fetchedPosts = response.data.content.map((post: PostProps) => ({
@@ -39,5 +44,5 @@ export const usePosts = () => {
         };
 
         fetchPosts();
-    }, []); 
+    }, [id]); 
 };
