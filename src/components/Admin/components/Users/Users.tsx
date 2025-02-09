@@ -4,8 +4,9 @@ import s from "./Users.module.css"
 import UsersStore from "../../../../stores/users-store"
 import { apiURL } from "../../../../configs/constants"
 import { User } from "./User"
+import { observer } from "mobx-react-lite"
 
-export const Users: React.FC = () => {
+export const Users: React.FC = observer(() => {
     const { users, setUsers } = UsersStore;
     const [inputValue, setInputValue] = useState("");
     
@@ -53,4 +54,4 @@ export const Users: React.FC = () => {
             </div>
         </div>
     )
-}
+})

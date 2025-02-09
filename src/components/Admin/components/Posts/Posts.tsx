@@ -12,7 +12,6 @@ export interface UserInfo {
     name: string;
     lastName: string;
 }
-
 export interface PostProps {
     id: string
     userID: UserInfo
