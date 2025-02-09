@@ -8,11 +8,13 @@ import { CreatePost } from "./components/CreatePost";
 import UserStore from "../../stores/user-store";
 import { useAccountInfo } from "../../hooks/useAccountInfo";
 import ModalStore from "../../stores/modal-store";
+import PostStore from "../../stores/post-store";
 
 export const Account: React.FC = observer(() => {
     const { clearToken, getID } = TokenStore;
-    const { name, lastName, userName, avatarURL, status, subscriptions } = UserStore;
+    const { name, lastName, userName, avatarURL, status, subscriptions, clear } = UserStore;
     const { setEditingModalActive, setAccountAvatarModalActive, setSubscribtionsModalActive } = ModalStore
+    const { setPosts } = PostStore;
     const navigate = useNavigate();
     const id = getID();
 
@@ -30,9 +32,11 @@ export const Account: React.FC = observer(() => {
      }
  };
 
-    // Выход из аккаунта
+    // Выход из аккаунта / сброс всех данных
     const handleLogOut = (): void => {
+        clear();
         clearToken();
+        setPosts([]);
         navigate('/registration');
     };
 

@@ -34,6 +34,15 @@ class UserStore {
     addSubscription = (newSub: string) => {
         this.subscriptions = [...this.subscriptions, newSub]
     }
+
+    clear = () => {
+        this.name = ""
+        this.lastName = ""
+        this.userName = ""
+        this.avatarURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s"
+        this.status = ""
+        this.subscriptions = []
+    }
 }
 
 export default new UserStore()

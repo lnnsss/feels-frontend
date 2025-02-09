@@ -12,6 +12,7 @@ export const Registration: React.FC = () => {
     const [lastName, setLastName] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    const [repeatPassword, setRepeatPassword] = useState<string>("")
     const [userName, setUserName] = useState<string>("")
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -32,8 +33,13 @@ export const Registration: React.FC = () => {
                 };
 
                 // проверка на пустые поля
-                if (!name.trim() || !lastName.trim() || !email.trim() || !password.trim() || !userName.trim()) {
+                if (!name.trim() || !lastName.trim() || !email.trim() || !password.trim() ||!repeatPassword.trim() || !userName.trim()) {
                     return setErrorMessage("Все поля должны быть заполнены")
+                }
+
+                // проверка на совпадение паролей
+                if (password != repeatPassword) {
+                    return setErrorMessage("Пароли не совпадают")
                 }
 
                 // запрос на сервер
@@ -45,6 +51,7 @@ export const Registration: React.FC = () => {
                 setLastName("")
                 setEmail("")
                 setPassword("")
+                setRepeatPassword("")
                 setUserName("")
                 setErrorMessage("")
 
@@ -84,6 +91,7 @@ export const Registration: React.FC = () => {
                     <LabelInput element="lastName" text="Фамилия" inputType="text" value={lastName} setValue={setLastName} />
                     <LabelInput element="email" text="Email" inputType="text" value={email} setValue={setEmail} />
                     <LabelInput element="password" text="Пароль" inputType="password" value={password} setValue={setPassword} />
+                    <LabelInput element="repeatPassword" text="Повтор пароля" inputType="password" value={repeatPassword} setValue={setRepeatPassword} />
                     <LabelInput element="userName" text="Юзернейм" inputType="text" value={userName} setValue={setUserName} />
                     <button onClick={handleBtnClick}>Зарегистрироваться</button>
                     <h6>Уже есть аккаунт? <Link className={s.registration__link} to="/login">Войти</Link></h6>
