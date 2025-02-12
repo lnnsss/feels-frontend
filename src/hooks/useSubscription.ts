@@ -1,11 +1,13 @@
 import axios from "axios";
-import UserStore from "../stores/user-store";
-import TokenStore from "../stores/token-store";
 import { apiURL } from "../configs/constants";
+import { useStores } from "../stores/root-store-context";
 
 const useSubscription = (subscriptionID: string) => {
-    const { setSubscriptions } = UserStore;
-    const { getID } = TokenStore;
+    const { 
+        token: { getID },
+        user: { setSubscriptions }
+    } = useStores();
+    
     const ourID = getID();
 
     // Подписаться на пользователя 

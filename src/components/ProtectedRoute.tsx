@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import TokenStore from '../stores/token-store';
+import { useStores } from '../stores/root-store-context';
 
 interface ProtectedRouteProps {
   isProtected: boolean; 
@@ -8,7 +8,9 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ isProtected, redirectTo }) => {
-  const hasToken = !!TokenStore.token;
+  const { token: { token } } = useStores();
+  
+  const hasToken = !!token;
 
   if (isProtected && !hasToken) {
     return <Navigate to={redirectTo} replace />;

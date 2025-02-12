@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import s from "./../Profile.module.css"
-import ProfileStore from "../../../stores/profile-store";
-import ProfilePostStore from "../../../stores/profile-post-store";
+import { useStores } from "../../../stores/root-store-context";
 
 export interface PostProps {
     name: string;
@@ -11,8 +10,10 @@ export interface PostProps {
 }
 
 export const Posts: React.FC = observer( () => {
-    const {posts} = ProfilePostStore
-    const {name} = ProfileStore;
+    const { 
+        profilePost: { posts },
+        profile: {name}
+    } = useStores();
 
     return (
         <div className={s.profile__posts}>

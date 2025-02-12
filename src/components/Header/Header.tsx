@@ -1,13 +1,14 @@
 import React from 'react';
 import s from './Header.module.css';
 import { Link } from 'react-router-dom';
-import HeaderStore from '../../stores/header-store';
 import { observer } from 'mobx-react-lite';
-import TokenStore from '../../stores/token-store';
+import { useStores } from '../../stores/root-store-context';
 
 const Header: React.FC = observer(() => {
-  const { isMenuOpen, toggleMenu } = HeaderStore;
-  const { token } = TokenStore
+  const { 
+    header: { isMenuOpen, toggleMenu },
+    token: { token }
+  } = useStores();
 
   return (
     <header className={s.header}>

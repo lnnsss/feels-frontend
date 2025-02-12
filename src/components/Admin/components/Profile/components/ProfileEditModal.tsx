@@ -3,8 +3,7 @@ import Form from "../../../../UI/Form/Form"
 import LabelInput from "../../../../UI/LabelInput/LabelInput"
 import axios, { AxiosError } from "axios"
 import { apiURL } from "../../../../../configs/constants"
-import ModalStore from "../../../../../stores/modal-store"
-import UserStore from "../../../../../stores/user-store"
+import { useStores } from "../../../../../stores/root-store-context"
 
 interface IProfileEditModal {
     id: string
@@ -18,8 +17,10 @@ export const ProfileEditModal: React.FC<IProfileEditModal> = ({id}) => {
     const [avatarURL, setAvatarURL] = useState<string>("")
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
-    const { setName: setNameUser, setLastName: setLastNameUser, setUserName: setUserNameUser, setAvatarURL: setAvatarURLUser, setStatus: setStatusUser } = UserStore
-    const { closeModals } = ModalStore    
+    const { 
+        modal: { closeModals },
+        user: { setName: setNameUser, setLastName: setLastNameUser, setUserName: setUserNameUser, setAvatarURL: setAvatarURLUser, setStatus: setStatusUser }
+    } = useStores(); 
 
     // Очистка полей
     const clearInputs = () => {

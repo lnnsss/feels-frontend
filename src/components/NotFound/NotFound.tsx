@@ -2,10 +2,12 @@ import React from "react";
 import s from "./NotFound.module.css"
 import { Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import TokenStore from "../../stores/token-store";
+import { useStores } from "../../stores/root-store-context";
 
 export const NotFound: React.FC = observer(() => {
-    const isAdmin = TokenStore.hasRole('ADMIN');
+    const { token: { hasRole } } = useStores();
+
+    const isAdmin = hasRole('ADMIN');
 
     return (
         <div className={s.notFound}>

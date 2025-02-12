@@ -3,9 +3,7 @@ import Form from "../../UI/Form/Form"
 import LabelInput from "../../UI/LabelInput/LabelInput"
 import axios, { AxiosError } from "axios"
 import { apiURL } from "../../../configs/constants"
-import TokenStore from "../../../stores/token-store"
-import ModalStore from "../../../stores/modal-store"
-import UserStore from "../../../stores/user-store"
+import { useStores } from "../../../stores/root-store-context"
 
 export const EditingModal: React.FC = () => {
     const [name, setName] = useState<string>("")
@@ -15,9 +13,11 @@ export const EditingModal: React.FC = () => {
     const [avatarURL, setAvatarURL] = useState<string>("")
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
-    const { setName: setNameUser, setLastName: setLastNameUser, setUserName: setUserNameUser, setAvatarURL: setAvatarURLUser, setStatus: setStatusUser } = UserStore
-    const { closeModals } = ModalStore    
-    const { getID } = TokenStore;
+    const { 
+        modal: { closeModals },
+        token: { getID },
+        user: { setName: setNameUser, setLastName: setLastNameUser, setUserName: setUserNameUser, setAvatarURL: setAvatarURLUser, setStatus: setStatusUser }
+    } = useStores();
     const id = getID();
 
     // Очистка полей

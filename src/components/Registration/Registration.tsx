@@ -4,8 +4,8 @@ import Form from "../UI/Form/Form";
 import LabelInput from "../UI/LabelInput/LabelInput";
 import axios, { AxiosError } from "axios";
 import {apiURL} from "../../configs/constants.ts"
-import TokenStore from "../../stores/token-store.ts";
 import { Link, useNavigate } from "react-router-dom";
+import { useStores } from "../../stores/root-store-context.ts";
 
 export const Registration: React.FC = () => {
     const [name, setName] = useState<string>("")
@@ -16,7 +16,7 @@ export const Registration: React.FC = () => {
     const [userName, setUserName] = useState<string>("")
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
-    const { setToken } = TokenStore;
+    const { token: { setToken } } = useStores();
     const navigate = useNavigate();
 
     const handleBtnClick = () => {

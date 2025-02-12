@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { apiURL } from "../configs/constants";
-import PostStore from "../stores/post-store";
-import UserStore from "../stores/user-store";
+import { useStores } from "../stores/root-store-context";
 
 export const useAccountInfo = (id: string | undefined) => {
-    const { setName, setLastName, setUserName, setAvatarURL, setStatus, setSubscriptions } = UserStore;
-    const { setPosts } = PostStore;
+    const { 
+        post: { setPosts },
+        user: { setName, setLastName, setUserName, setAvatarURL, setStatus, setSubscriptions }
+    } = useStores(); 
 
     useEffect(() => {
         const fetchAccountInfo = async () => {

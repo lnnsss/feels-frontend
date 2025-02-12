@@ -1,10 +1,8 @@
 import s from "./../Account.module.css";
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
-import UserStore from "../../../stores/user-store";
 import { apiURL } from "../../../configs/constants";
-import TokenStore from "../../../stores/token-store";
-import PostStore from "../../../stores/post-store";
+import { useStores } from "../../../stores/root-store-context";
 
 export interface PostProps {
     name: string;
@@ -23,9 +21,12 @@ export const CreatePost: React.FC = () => {
     const [inputValue, setInputValue] = useState<string>("");
     const [colorValue, setColorValue] = useState<string>("#000000");
     const [inputError, setInputError] = useState<boolean>(false);
-    const { name } = UserStore;
-    const { addPost } = PostStore;
-    const { getID } = TokenStore;
+    const { 
+        post: { addPost },
+        token: { getID },
+        user: { name }
+    } = useStores();
+    
     const id = getID();
 
     // Обработка изменения текста

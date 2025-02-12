@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import UserStore from "../../../stores/user-store";
 import Form from "../../UI/Form/Form";
 import { User } from "../../Users/components/User";
 import axios from "axios";
 import { apiURL } from "../../../configs/constants";
-import TokenStore from "../../../stores/token-store";
+import { useStores } from "../../../stores/root-store-context";
 
 interface User {
   userName: string;
@@ -15,10 +14,14 @@ interface User {
 }
 
 export const SubscriptionsModal: React.FC = observer(() => {
-  const { subscriptions } = UserStore; 
   const [subs, setSubs] = useState<User[]>([]); 
   const [loading, setLoading] = useState<boolean>(true); 
-  const id = TokenStore.getID()
+  const { 
+    token: { getID },
+    user: { subscriptions } 
+  } = useStores();
+
+  const id = getID()
 
   useEffect(() => {
     const loadUsers = async () => {

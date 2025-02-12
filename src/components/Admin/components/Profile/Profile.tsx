@@ -1,6 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import ModalStore from "../../../../stores/modal-store";
-import ProfileStore from "../../../../stores/profile-store";
 import s from "./Profile.module.css";
 import { useProfileInfo } from "../../../../hooks/useProfileInfo";
 import { observer } from "mobx-react-lite";
@@ -8,12 +6,15 @@ import React from "react";
 import axios from "axios";
 import { apiURL } from "../../../../configs/constants";
 import { Posts } from "./components/Posts";
+import { useStores } from "../../../../stores/root-store-context";
 
 
 export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
-    const { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions } = ProfileStore;
-    const { setProfileAvatarModalActive, setProfileEditModalActive } = ModalStore;
+    const { 
+        modal: { setProfileAvatarModalActive, setProfileEditModalActive },
+        profile: { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions }
+    } = useStores();
     const navigate = useNavigate();
 
     // Получение данных пользователя

@@ -1,20 +1,19 @@
 import React from "react";
 import s from "./Account.module.css";
-import TokenStore from "../../stores/token-store";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
 import { Posts } from "./components/Posts";
 import { CreatePost } from "./components/CreatePost";
-import UserStore from "../../stores/user-store";
 import { useAccountInfo } from "../../hooks/useAccountInfo";
-import ModalStore from "../../stores/modal-store";
-import PostStore from "../../stores/post-store";
+import { useStores } from "../../stores/root-store-context";
 
 export const Account: React.FC = observer(() => {
-    const { clearToken, getID } = TokenStore;
-    const { name, lastName, userName, avatarURL, status, subscriptions, clear } = UserStore;
-    const { setEditingModalActive, setAccountAvatarModalActive, setSubscribtionsModalActive } = ModalStore
-    const { setPosts } = PostStore;
+    const { 
+        modal: { setEditingModalActive, setAccountAvatarModalActive, setSubscribtionsModalActive }, 
+        post: { setPosts },
+        token: { clearToken, getID },
+        user: { name, lastName, userName, avatarURL, status, subscriptions, clear }
+    } = useStores();
     const navigate = useNavigate();
     const id = getID();
 

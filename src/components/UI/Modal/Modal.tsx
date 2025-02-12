@@ -1,14 +1,14 @@
 import React from "react";
 import s from "./Modal.module.css";
 import { observer } from "mobx-react-lite";
-import ModalStore from "../../../stores/modal-store";
+import { useStores } from "../../../stores/root-store-context";
 
 interface Props {
     children: React.ReactNode;
 }
 
 const Modal: React.FC<Props> = observer(({ children }) => {
-    const { closeModals } = ModalStore;
+    const { modal: { closeModals } } = useStores(); 
 
     const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();

@@ -1,9 +1,9 @@
 import React from "react";
 import s from "./Posts.module.css"
 import { observer } from "mobx-react-lite";
-import PostsStore from "../../stores/posts-store";
 import { Link } from "react-router-dom";
 import { usePosts } from "../../hooks/usePosts";
+import { useStores } from "../../stores/root-store-context";
 
 export interface UserInfo {
     userName: string;
@@ -20,7 +20,7 @@ export interface PostProps {
 }
 
 export const Posts: React.FC = observer(() => {
-    const { posts } = PostsStore
+    const { posts: { posts } } = useStores();
 
     // Получаем посты
     usePosts()

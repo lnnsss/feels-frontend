@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import s from "./Users.module.css"
-import UsersStore from "../../stores/users-store";
 import axios from "axios";
 import { apiURL } from "../../configs/constants";
 import { observer } from "mobx-react-lite";
 import { User } from "./components/User";
-import TokenStore from "../../stores/token-store";
+import { useStores } from "../../stores/root-store-context";
 
 export const Users: React.FC = observer(() => {
     const [activeFilter, setActiveFilter] = useState("all");
     const [inputValue, setInputValue] = useState("");
-    const { users, setUsers } = UsersStore;
-    const id = TokenStore.getID()
+    const { 
+        token: { getID },
+        users: { users, setUsers }
+    } = useStores();
+    const id = getID()
 
     // Запрос на сервер
     useEffect(() => {

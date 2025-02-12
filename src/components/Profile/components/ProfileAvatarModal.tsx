@@ -1,7 +1,7 @@
-import ProfileStore from "../../../stores/profile-store"
+import { useStores } from "../../../stores/root-store-context";
 
 export const ProfileAvatarModal: React.FC = () => {
-    const {avatarURL} = ProfileStore
+    const { profile: { avatarURL } } = useStores();
 
     return (
         <img src={avatarURL} alt="avatar" style={{ width: '60vw', height: '60vw', objectFit: 'cover' }}/>

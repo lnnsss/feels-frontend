@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { apiURL } from "../configs/constants";
-import PostsStore from "../stores/posts-store";
 import { PostProps } from "../components/Posts/Posts";
+import { useStores } from "../stores/root-store-context";
 
 export const usePosts = (id?: string) => {
-    const { setPosts } = PostsStore;
+    const { posts: { setPosts } } = useStores();
 
     useEffect(() => {
         const fetchPosts = async () => {

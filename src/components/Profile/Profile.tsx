@@ -1,19 +1,19 @@
 import { useParams } from "react-router-dom";
-import ModalStore from "../../stores/modal-store";
-import ProfileStore from "../../stores/profile-store";
 import s from "./Profile.module.css";
 import { useProfileInfo } from "../../hooks/useProfileInfo";
 import { observer } from "mobx-react-lite";
 import { Posts } from "./components/Posts";
 import React from "react";
 import { SubscribeButtons } from "./components/SubscribeButtons";
-import TokenStore from "../../stores/token-store";
+import { useStores } from "../../stores/root-store-context";
 
 export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
-    const { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions } = ProfileStore;
-    const { setProfileAvatarModalActive } = ModalStore;
-    const {getID, token} = TokenStore
+    const { 
+        modal: { setProfileAvatarModalActive }, 
+        profile: { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions },
+        token: {getID, token}
+    } = useStores(); 
     const ourID = getID()
 
     // Получение данных пользователя

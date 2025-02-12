@@ -4,15 +4,15 @@ import LabelInput from "../UI/LabelInput/LabelInput";
 import axios, { AxiosError } from "axios";
 import { apiURL } from "../../configs/constants";
 import Form from "../UI/Form/Form";
-import TokenStore from "../../stores/token-store";
 import { Link, useNavigate } from "react-router-dom";
+import { useStores } from "../../stores/root-store-context";
 
 export const Login: React.FC = () => {
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
-    const { setToken } = TokenStore;
+    const { token: { setToken } } = useStores();
     const navigate = useNavigate();
 
     const handleBtnClick = () => {

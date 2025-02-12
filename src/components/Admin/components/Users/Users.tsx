@@ -1,13 +1,13 @@
 import React, { useEffect,useState } from "react"
 import axios from "axios"
 import s from "./Users.module.css"
-import UsersStore from "../../../../stores/users-store"
 import { apiURL } from "../../../../configs/constants"
 import { User } from "./User"
 import { observer } from "mobx-react-lite"
+import { useStores } from "../../../../stores/root-store-context"
 
 export const Users: React.FC = observer(() => {
-    const { users, setUsers } = UsersStore;
+    const { users: { users, setUsers } } = useStores();
     const [inputValue, setInputValue] = useState("");
     
     // Запрос на сервер

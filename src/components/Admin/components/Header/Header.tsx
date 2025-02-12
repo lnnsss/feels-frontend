@@ -1,13 +1,14 @@
 import React from "react"
 import s from "./Header.module.css"
 import { Link, useNavigate } from "react-router-dom";
-import HeaderStore from "../../../../stores/header-store";
-import TokenStore from "../../../../stores/token-store";
 import { observer } from "mobx-react-lite";
+import { useStores } from "../../../../stores/root-store-context";
 
 const Header: React.FC = observer(() => {
-    const { isMenuOpen, toggleMenu } = HeaderStore;
-    const {clearToken} = TokenStore
+  const { 
+    header: { isMenuOpen, toggleMenu },
+    token: {clearToken}
+  } = useStores();
     const navigate = useNavigate();
 
     const handleLogOut = (): void => {

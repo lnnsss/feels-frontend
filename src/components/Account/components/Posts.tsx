@@ -1,12 +1,13 @@
 import { observer } from "mobx-react-lite";
 import s from "./../Account.module.css"
-import PostStore from "../../../stores/post-store";
-import UserStore from "../../../stores/user-store";
 import { PostProps } from "./CreatePost";
+import { useStores } from "../../../stores/root-store-context";
 
 export const Posts: React.FC = observer(() => {
-    const {posts} = PostStore
-    const {name} = UserStore;
+    const { 
+        post: { posts },
+        user: { name }
+    } = useStores(); 
 
     return (
         <div className={s.account__posts}>

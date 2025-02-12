@@ -2,11 +2,11 @@ import s from "../Profile.module.css";
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import useSubscription from "../../../hooks/useSubscription";
-import UserStore from "../../../stores/user-store";
+import { useStores } from "../../../stores/root-store-context";
 
 export const SubscribeButtons: React.FC<{ userId: string }> = observer(({ userId }) => {
     const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
-    const {subscriptions} = UserStore
+    const { user: { subscriptions } } = useStores();
     
     const { handleSubscribeUser, handleUnsubscribeUser } = useSubscription(userId);
 

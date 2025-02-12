@@ -1,10 +1,10 @@
 import React from "react";
 import s from "../Profile.module.css"
 import { observer } from "mobx-react-lite";
-import PostsStore from "../../../../../stores/posts-store";
 import { usePosts } from "../../../../../hooks/usePosts";
 import axios from "axios";
 import { apiURL } from "../../../../../configs/constants";
+import { useStores } from "../../../../../stores/root-store-context";
 
 interface PostProps {
     id: string
@@ -17,16 +17,18 @@ interface IPosts {
 }
 
 const handleDeletePost = async (id: string) => {
+    const { posts: { removePost } } = useStores();
+
     try {
       await axios.delete(`${apiURL}/posts/${id}`);
-      PostsStore.removePost(id);
+      removePost(id);
     } catch (error) {
       console.error("Error deleting post:", error);
     }
   };
 
 export const Posts: React.FC<IPosts> = observer(({id}) => {
-    const { posts } = PostsStore
+    const { posts: { posts } } = useStores();
 
     // Получаем посты
     usePosts(id)
