@@ -22,6 +22,4 @@ const Modals: React.FC = observer(() => {
     )
 })
 
-
-
 export default Modals
