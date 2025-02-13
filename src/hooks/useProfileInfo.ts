@@ -6,7 +6,7 @@ import { useStores } from "../stores/root-store-context";
 export const useProfileInfo = (userName: string | undefined) => {
     const { 
         profilePost: { setPosts },
-        profile: { setID, setName, setLastName, setAvatarURL, setStatus, setSubscriptions }
+        profile: { setID, setName, setLastName, setAvatarURL, setStatus, setSubscriptions, setPostsCount }
     } = useStores();
 
     useEffect(() => {
@@ -14,11 +14,14 @@ export const useProfileInfo = (userName: string | undefined) => {
             if (!userName) return; 
 
             try {
+
+                // Запросы на получение данных пользователя и его постов
                 const [accountResponse, postsResponse] = await Promise.all([
                     axios.get(`${apiURL}/users?userName=${userName}`), 
                     axios.get(`${apiURL}/posts?userName=${userName}`),
                 ]);
 
+                // Данные пользователя
                 const { content } = accountResponse.data;          
                 setID(content._id)
                 setName(content.name);
@@ -27,6 +30,11 @@ export const useProfileInfo = (userName: string | undefined) => {
                 setStatus(content.status);
                 setSubscriptions(content.subscriptions);
 
+                // Количество постов пользователя
+                const postsCountResponse = await axios.get(`${apiURL}/posts/count?userID=${content._id}`)
+                setPostsCount(postsCountResponse.data.content)
+
+                // Посты пользователя
                 if ( postsResponse.data.content && postsResponse.data.content.length > 0) {
                     const fetchedPosts = postsResponse.data.content.map((post: any) => ({
                         name: content.name,

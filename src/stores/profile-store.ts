@@ -7,6 +7,7 @@ class ProfileStore {
     avatarURL: string = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
     status: string = "";
     subscriptions: string[] = [];
+    postsCount: number = 0;
 
     constructor() {
         makeAutoObservable(this)
@@ -29,6 +30,9 @@ class ProfileStore {
     }
     setSubscriptions = (newSubs: string[]) => {
         this.subscriptions = newSubs
+    }
+    setPostsCount = (newCount: number) => {
+        this.postsCount = newCount
     }
 }
 

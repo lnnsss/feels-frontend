@@ -11,7 +11,7 @@ export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
     const { 
         modal: { setProfileAvatarModalActive }, 
-        profile: { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions },
+        profile: { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions, postsCount },
         token: {getID, token}
     } = useStores(); 
     const ourID = getID()
@@ -50,6 +50,7 @@ export const Profile: React.FC = observer(() => {
                     <button onClick={handleUserNameClick} className={s.profile__username}>@{userName}</button>
                     <h3 className={s.profile__status}>{status}</h3>
                     <h4 className={s.profile__subscribes}>Подписки: {profileSubscriptions.length}</h4>
+                    <h4 className={s.profile__postsCount}>Постов: {postsCount}</h4>
                     {ourID != id && token && <SubscribeButtons userId={id} />}
                 </div>
                 <Posts />

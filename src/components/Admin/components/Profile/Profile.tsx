@@ -13,7 +13,7 @@ export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
     const { 
         modal: { setProfileAvatarModalActive, setProfileEditModalActive },
-        profile: { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions }
+        profile: { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions, postsCount }
     } = useStores();
     const navigate = useNavigate();
 
@@ -63,6 +63,7 @@ export const Profile: React.FC = observer(() => {
                     <button onClick={handleUserNameClick} className={s.profile__username}>@{userName}</button>
                     <h3 className={s.profile__status}>{status}</h3>
                     <h4 className={s.profile__subscribes}>Подписки: {profileSubscriptions.length}</h4>
+                    <h4 className={s.profile__postsCount}>Постов: {postsCount}</h4>
                 </div>
                 <div className={s.profile__buttons}>
                     <button className={s.profile__button} onClick={() => setProfileEditModalActive(id)}>Редактировать</button>

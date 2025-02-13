@@ -50,7 +50,7 @@
   font-size: 20px;
   font-weight: 500;
 }
-.profile__subscribes {
+.profile__subscribes, .profile__postsCount {
   font-size: 14px;
   font-weight: 500;
 }
