@@ -6,7 +6,7 @@
 
 :root {
   --maxWidth: 1040px;
-  --white: #eff8ff;
+  --white: #ffffff; /* #eff8ff */
   --grey: #abb4bb;
   --mainColor: #a2add0;
   --black: #000000;
