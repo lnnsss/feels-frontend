@@ -41,6 +41,11 @@
   font-size: 18px;
   text-align: justify;
 }
+.posts__null {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--grey);
+}
 
 /*----media-------------------------------------------*/
 

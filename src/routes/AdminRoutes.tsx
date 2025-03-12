@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Admin from "../components/Pages/AdminPages/AdminPage";
 import NotFound from "../components/Pages/UserPages/NotFoundPage";

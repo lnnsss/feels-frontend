@@ -29,7 +29,11 @@ export const Posts: React.FC = observer(() => {
         <div className={s.posts}>
             <div className={`__container ${s.posts__container}`}>
                 <div className={s.posts__blocks}>
-                    {posts.map((p, i) => <Post key={i} userID={p.userID} createdAt={p.createdAt} text={p.text} color={p.color} />)}
+                    {
+                        posts.length
+                        ? posts.map((p, i) => <Post key={i} userID={p.userID} createdAt={p.createdAt} text={p.text} color={p.color} />)
+                        : (<span className={s.posts__null}>Посты отсутствуют</span>)
+                    }
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import s from "../Profile.module.css";
 import { observer } from "mobx-react-lite";
 import { usePosts } from "../../../../../hooks/usePosts";
@@ -41,6 +41,7 @@ const Post: React.FC<PostProps> = observer(({ id, createdAt, text, color }) => {
       await axios.delete(`${apiURL}/posts/${id}`);
       removePost(id);
     } catch (error) {
+      console.error(error)
     }
   }, [id, removePost]);
 

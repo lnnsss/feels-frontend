@@ -1,62 +1,77 @@
-import React from "react";
-import s from "./Posts.module.css"
+import s from "./Posts.module.css";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { usePosts } from "../../../../hooks/usePosts";
 import axios from "axios";
 import { apiURL } from "../../../../configs/constants";
 import { useStores } from "../../../../stores/root-store-context";
+import React from "react";
 
 export interface UserInfo {
     userName: string;
     name: string;
     lastName: string;
 }
+
 export interface PostProps {
-    id: string
-    userID: UserInfo
-    createdAt: string; 
+    id: string;
+    userID: UserInfo;
+    createdAt: string;
     text: string;
     color: string;
 }
 
-const handleDeletePost = async (id: string) => {
-    const { posts: { removePost } } = useStores(); 
-
-    try {
-      await axios.delete(`${apiURL}/posts/${id}`);
-      removePost(id);
-    } catch (error) {
-      console.error("Error deleting post:", error);
-    }
-  };
-
 export const Posts: React.FC = observer(() => {
-    const { posts: { posts } } = useStores(); 
+    const { posts: { posts, removePost } } = useStores();
 
-    // Получаем посты
-    usePosts()
+    // Загружаем посты
+    usePosts();
+
+    const handleDeletePost = async (id: string) => {
+        try {
+            await axios.delete(`${apiURL}/posts/${id}`);
+            removePost(id);
+        } catch (error) {
+            console.error("Ошибка при удалении поста:", error);
+        }
+    };
 
     return (
         <div className={s.posts}>
             <div className={`__container ${s.posts__container}`}>
                 <div className={s.posts__blocks}>
-                    {posts.map((p, i) => <Post key={i} id={p.id} userID={p.userID} createdAt={p.createdAt} text={p.text} color={p.color} />)}
+                    {
+                        posts.length
+                            ? posts.map((p) => (
+                                <Post
+                                    key={p.id}
+                                    id={p.id}
+                                    userID={p.userID}
+                                    createdAt={p.createdAt}
+                                    text={p.text}
+                                    color={p.color}
+                                    onDelete={handleDeletePost}
+                                />
+                            ))
+                            : (<span className={s.posts__null}>Посты отсутствуют</span>)
+                    }
                 </div>
             </div>
         </div>
-    )
-})
+    );
+});
 
-const Post: React.FC<PostProps> = observer(({ id, userID, createdAt, text, color }: PostProps) => {    
+const Post: React.FC<PostProps & { onDelete: (id: string) => void }> = observer(({ id, userID, createdAt, text, color, onDelete }) => {
     return (
         <div className={s.posts__block} style={{ border: `2px solid ${color}` }}>
             <div className={s.posts__block__header}>
-                <Link to={`/users/${userID.userName}`} className={s.posts__block__name}>{userID.name} {userID.lastName}</Link>
+                <Link to={`/users/${userID.userName}`} className={s.posts__block__name}>
+                    {userID.name} {userID.lastName}
+                </Link>
                 <p className={s.posts__block__text}>{text}</p>
                 <h4 className={s.posts__block__date}>{createdAt}</h4>
             </div>
-            <button className={s.posts__block__delBtn} onClick={() => handleDeletePost(id)} >Удалить</button>
+            <button className={s.posts__block__delBtn} onClick={() => onDelete(id)}>Удалить</button>
         </div>
     );
 });

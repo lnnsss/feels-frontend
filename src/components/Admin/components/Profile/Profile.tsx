@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import s from "./Profile.module.css";
 import { useProfileInfo } from "../../../../hooks/useProfileInfo";
 import { observer } from "mobx-react-lite";
-import React from "react";
 import axios from "axios";
 import { apiURL } from "../../../../configs/constants";
 import { Posts } from "./components/Posts";

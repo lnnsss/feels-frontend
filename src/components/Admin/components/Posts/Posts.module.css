@@ -58,6 +58,11 @@
   background-color: red;
   color: var(--white);
 }
+.posts__null {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--grey);
+}
 
 /*----media-------------------------------------------*/
 
