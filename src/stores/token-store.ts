@@ -1,23 +1,24 @@
 import { makeAutoObservable } from "mobx";
+import Cookies from "js-cookie";
 
 class TokenStore {
-  token: string = localStorage.getItem('jwt') || '';
+  token: string = Cookies.get('jwt') || '';
   isAdmin: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
-    this.updateRoles(); 
+    this.updateRoles();
   }
 
   setToken = (newToken: string): void => {
     this.token = newToken;
-    localStorage.setItem('jwt', newToken); 
+    Cookies.set('jwt', newToken, { secure: true, sameSite: 'Strict' });
     this.updateRoles();
   };
 
   clearToken = (): void => {
     this.token = '';
-    localStorage.removeItem('jwt');
+    Cookies.remove('jwt');
     this.isAdmin = false;
   };
 
@@ -25,13 +26,13 @@ class TokenStore {
     if (this.token) {
       try {
         const payload = JSON.parse(atob(this.token.split('.')[1]));
-        return payload._id
+        return payload._id;
       } catch (error) {
         console.error("Ошибка при декодировании токена:", error);
-        return undefined
+        return undefined;
       }
     }
-  }
+  };
 
   updateRoles = (): void => {
     if (this.token) {
@@ -55,7 +56,7 @@ class TokenStore {
         return false;
       }
     } else {
-      return false
+      return false;
     }
   };
 }

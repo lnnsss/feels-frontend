@@ -6,6 +6,7 @@ import axios, { AxiosError } from "axios";
 import {apiURL} from "../../configs/constants.ts"
 import { Link, useNavigate } from "react-router-dom";
 import { useStores } from "../../stores/root-store-context.ts";
+import Cookies from "js-cookie";
 
 export const Registration: React.FC = () => {
     const [name, setName] = useState<string>("")
@@ -55,10 +56,10 @@ export const Registration: React.FC = () => {
                 setUserName("")
                 setErrorMessage("")
 
-                // сохранение токена и ответа
-                setMessage(response.data.message)
-                setToken(response.data.token)
-                localStorage.setItem('jwt', response.data.token);
+                // Сохранение токена в cookies
+                setMessage(response.data.message);
+                setToken(response.data.token);
+                Cookies.set('jwt', response.data.token, { secure: true, sameSite: 'Strict' });
 
                 // переход на следующую страницу
                 const tokenPayload = JSON.parse(atob(response.data.token.split('.')[1]));
