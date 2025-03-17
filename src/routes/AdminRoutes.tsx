@@ -11,7 +11,7 @@ const AdminRoutes: React.FC = () => {
         <Routes>
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/users" element={<Users />} />
-            <Route path="/users/:userName" element={<Profile />} />
+            <Route path="/admin/users/:userName" element={<Profile />} />
             <Route path="/admin/posts" element={<Posts />} />
 
             {/* Перенаправление для несуществующих страниц */}

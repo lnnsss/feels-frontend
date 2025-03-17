@@ -4,12 +4,14 @@ import LabelInput from "../../../../UI/LabelInput/LabelInput"
 import axios, { AxiosError } from "axios"
 import { apiURL } from "../../../../../configs/constants"
 import { useStores } from "../../../../../stores/root-store-context"
+import {useNavigate} from "react-router-dom";
+import {observer} from "mobx-react-lite";
 
 interface IProfileEditModal {
     id: string
 }
 
-export const ProfileEditModal: React.FC<IProfileEditModal> = ({id}) => {
+export const ProfileEditModal: React.FC<IProfileEditModal> = observer(({id}) => {
     const [name, setName] = useState<string>("")
     const [lastName, setLastName] = useState<string>("")
     const [userName, setUserName] = useState<string>("")
@@ -17,10 +19,11 @@ export const ProfileEditModal: React.FC<IProfileEditModal> = ({id}) => {
     const [avatarURL, setAvatarURL] = useState<string>("")
     const [message, setMessage] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
-    const { 
+    const {
         modal: { closeModals },
         user: { setName: setNameUser, setLastName: setLastNameUser, setUserName: setUserNameUser, setAvatarURL: setAvatarURLUser, setStatus: setStatusUser }
-    } = useStores(); 
+    } = useStores();
+    const navigate = useNavigate();
 
     // Очистка полей
     const clearInputs = () => {
@@ -33,6 +36,7 @@ export const ProfileEditModal: React.FC<IProfileEditModal> = ({id}) => {
 
     // Запрос на сервер
     const handleChangeUserInfo = async (): Promise<void> => {
+
         try {
             // Берем только непустые поля
             const body = Object.fromEntries(
@@ -44,7 +48,7 @@ export const ProfileEditModal: React.FC<IProfileEditModal> = ({id}) => {
                     avatarURL,
                 }).filter(([_, value]) => value.trim() !== "")
             );
-    
+
             const response = await axios.patch(`${apiURL}/users/${id}`, body);
             setMessage(response.data.message);
             console.log("Профиль успешно обновлён:", response.data);
@@ -55,9 +59,13 @@ export const ProfileEditModal: React.FC<IProfileEditModal> = ({id}) => {
             if (body.userName) setUserNameUser(body.userName);
             if (body.status) setStatusUser(body.status);
             if (body.avatarURL) setAvatarURLUser(body.avatarURL);
-    
+
             clearInputs();
             closeModals();
+
+            if (body.userName) {
+                navigate(`/admin/users/${body.userName}`)
+            }
         } catch (err) {
             const axiosError = err as AxiosError<{ message: string }>;
             setMessage("");
@@ -79,4 +87,4 @@ export const ProfileEditModal: React.FC<IProfileEditModal> = ({id}) => {
             <button onClick={handleChangeUserInfo}>Изменить</button>
         </Form>
     )
-}
+})

@@ -7,7 +7,6 @@ import { apiURL } from "../../../../configs/constants";
 import { Posts } from "./components/Posts";
 import { useStores } from "../../../../stores/root-store-context";
 
-
 export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
     const { 
@@ -15,7 +14,6 @@ export const Profile: React.FC = observer(() => {
         profile: { id, name, lastName, avatarURL, status, subscriptions: profileSubscriptions, postsCount }
     } = useStores();
     const navigate = useNavigate();
-
     // Получение данных пользователя
     useProfileInfo(userName);
 

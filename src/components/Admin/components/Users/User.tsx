@@ -15,7 +15,7 @@ export const User: React.FC<User> = observer(({userName, name, lastName, avatarU
     const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
 
     return (
-        <Link to={`/users/${userName}`} className={s.users__block}>
+        <Link to={`/admin/users/${userName}`} className={s.users__block}>
             <div
                 className={s.users__block__avatar} 
                 style={{ backgroundImage: `url(${ava})` }}

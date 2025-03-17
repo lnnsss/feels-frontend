@@ -65,7 +65,7 @@ const Post: React.FC<PostProps & { onDelete: (id: string) => void }> = observer(
     return (
         <div className={s.posts__block} style={{ border: `2px solid ${color}` }}>
             <div className={s.posts__block__header}>
-                <Link to={`/users/${userID.userName}`} className={s.posts__block__name}>
+                <Link to={`/admin/users/${userID.userName}`} className={s.posts__block__name}>
                     {userID.name} {userID.lastName}
                 </Link>
                 <p className={s.posts__block__text}>{text}</p>
