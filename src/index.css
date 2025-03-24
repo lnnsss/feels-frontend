@@ -7,6 +7,7 @@
 :root {
   --maxWidth: 1040px;
   --white: #ffffff; /* #eff8ff */
+  --lightGrey: #e6e6e6;
   --grey: #abb4bb;
   --mainColor: #a2add0;
   --black: #000000;
@@ -44,6 +45,9 @@ p {
   font-size: inherit;
   font-family: inherit;
 }
+html, body {
+  height: 100%;
+}
 body {
   font-size: var(--baseFontSize);
   font-weight: var(--baseFontWeight);
@@ -68,7 +72,6 @@ main {
   width: 100%;
   height: 100%;
   flex: 1;
-  overflow: hidden;
 }
 img, button {
   user-select: none;

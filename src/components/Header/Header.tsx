@@ -18,18 +18,21 @@ const Header: React.FC = observer(() => {
       </div>
       <nav className={`${s.header__nav} ${isMenuOpen ? s.header__navOpen : ''}`}>
         <ul className={s.header__navList}>
-          <li className={s.header__navItem}><Link to="/" className={s.header__navLink}>Главная</Link></li>
-          <li className={s.header__navItem}><Link to="/users" className={s.header__navLink}>Пользователи</Link></li>
-          <li className={s.header__navItem}><Link to="/posts" className={s.header__navLink}>Посты</Link></li>
+          <li><Link to="/" className={s.header__navLink}>Главная</Link></li>
+          <li><Link to="/users" className={s.header__navLink}>Пользователи</Link></li>
+          <li><Link to="/posts" className={s.header__navLink}>Посты</Link></li>
           {
           token 
           ? (
-            <li className={s.header__navItem}><Link to="/account" className={s.header__navLink}>Личный кабинет</Link></li>
-          )
-          : (
-            <>
-              <li className={s.header__navItem}><Link to="/registration" className={s.header__navLink}>Регистрация</Link></li>
-              <li className={s.header__navItem}><Link to="/login" className={s.header__navLink}>Вход</Link></li>
+                  <>
+                      <li><Link to="/chats" className={s.header__navLink}>Переписки</Link></li>
+                      <li><Link to="/account" className={s.header__navLink}>Личный кабинет</Link></li>
+                  </>
+              )
+              : (
+                  <>
+                      <li><Link to="/registration" className={s.header__navLink}>Регистрация</Link></li>
+              <li><Link to="/login" className={s.header__navLink}>Вход</Link></li>
             </>
             )
           }
