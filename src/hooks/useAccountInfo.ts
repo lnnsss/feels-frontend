@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { apiURL } from "../configs/constants";
+import { apiPostsURL, apiUsersURL } from "../configs/constants";
 import { useStores } from "../stores/root-store-context";
 
 export const useAccountInfo = (id: string | undefined) => {
@@ -13,8 +13,8 @@ export const useAccountInfo = (id: string | undefined) => {
         const fetchAccountInfo = async () => {
             try {
                 const [accountResponse, postsResponse] = await Promise.all([
-                    axios.get(`${apiURL}/users/${id}`),
-                    axios.get(`${apiURL}/posts?userID=${id}`),
+                    axios.get(`${apiUsersURL}/${id}`),
+                    axios.get(`${apiPostsURL}?userID=${id}`),
                 ]);
 
                 const { content } = accountResponse.data;

@@ -1,7 +1,7 @@
 import s from "./../Account.module.css";
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
-import { apiURL } from "../../../configs/constants";
+import {apiPostsURL} from "../../../configs/constants";
 import { useStores } from "../../../stores/root-store-context";
 
 export interface PostProps {
@@ -70,7 +70,7 @@ export const CreatePost: React.FC = () => {
                 color: colorValue,
             };
 
-            await axios.post(`${apiURL}/posts`, body);
+            await axios.post(`${apiPostsURL}`, body);
 
             addPost(newPost);
             setInputValue("");

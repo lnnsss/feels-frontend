@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { apiURL } from "../configs/constants";
+import { apiPostsURL } from "../configs/constants";
 import { PostProps } from "../components/Posts/Posts";
 import { useStores } from "../stores/root-store-context";
 
@@ -12,9 +12,9 @@ export const usePosts = (id?: string) => {
             try {
                 let response 
                 if (id) {
-                    response = await axios.get(`${apiURL}/posts?userID=${id}`)
+                    response = await axios.get(`${apiPostsURL}?userID=${id}`)
                 } else {
-                    response = await axios.get(`${apiURL}/posts/all`)
+                    response = await axios.get(`${apiPostsURL}/all`)
                 }
 
                 if ( response.data.content && response.data.content.length > 0) {

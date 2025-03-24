@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import s from "./Login.module.css"
 import LabelInput from "../UI/LabelInput/LabelInput";
 import axios, { AxiosError } from "axios";
-import { apiURL } from "../../configs/constants";
+import { apiAuthURL } from "../../configs/constants";
 import Form from "../UI/Form/Form";
 import { Link, useNavigate } from "react-router-dom";
 import { useStores } from "../../stores/root-store-context";
@@ -31,7 +31,7 @@ export const Login: React.FC = () => {
                 }
 
                 // запрос на сервер
-                const response = await axios.post(`${apiURL}/auth/login`, body);
+                const response = await axios.post(`${apiAuthURL}/login`, body);
                 console.log(response.data);
 
                 // очистка полей

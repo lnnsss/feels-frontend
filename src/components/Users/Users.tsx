@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import s from "./Users.module.css"
 import axios from "axios";
-import { apiURL } from "../../configs/constants";
+import { apiUsersURL } from "../../configs/constants";
 import { observer } from "mobx-react-lite";
 import { User } from "./components/User";
 import { useStores } from "../../stores/root-store-context";
@@ -21,7 +21,7 @@ export const Users: React.FC = observer(() => {
             try {
                 if (activeFilter == "sub") { // получаем пользователей, на которых пользователь подписан
                     if (id) { // проверяем авторизован ли пользователь
-                        const response = await axios.get(`${apiURL}/users/${id}/subscriptions`)
+                        const response = await axios.get(`${apiUsersURL}/${id}/subscriptions`)
                         setUsers(response.data.content)
                         console.log(response.data.message, response.data.content);  
                     } else {
@@ -29,7 +29,7 @@ export const Users: React.FC = observer(() => {
                         console.log("Пользователь не авторизован"); 
                     }
                 } else { // получаем всех пользователей
-                    const response = await axios.get(`${apiURL}/users`)
+                    const response = await axios.get(apiUsersURL)
                     setUsers(response.data.content)
                     console.log(response.data.message, response.data.content);   
                 } 

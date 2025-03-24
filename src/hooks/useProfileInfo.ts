@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { apiURL } from "../configs/constants";
+import { apiPostsURL, apiUsersURL } from "../configs/constants";
 import { useStores } from "../stores/root-store-context";
 
 export const useProfileInfo = (userName: string | undefined) => {
@@ -17,8 +17,8 @@ export const useProfileInfo = (userName: string | undefined) => {
 
                 // Запросы на получение данных пользователя и его постов
                 const [accountResponse, postsResponse] = await Promise.all([
-                    axios.get(`${apiURL}/users?userName=${userName}`), 
-                    axios.get(`${apiURL}/posts?userName=${userName}`),
+                    axios.get(`${apiUsersURL}?userName=${userName}`),
+                    axios.get(`${apiPostsURL}?userName=${userName}`),
                 ]);
 
                 // Данные пользователя
@@ -31,7 +31,7 @@ export const useProfileInfo = (userName: string | undefined) => {
                 setSubscriptions(content.subscriptions);
 
                 // Количество постов пользователя
-                const postsCountResponse = await axios.get(`${apiURL}/posts/count?userID=${content._id}`)
+                const postsCountResponse = await axios.get(`${apiPostsURL}/count?userID=${content._id}`)
                 setPostsCount(postsCountResponse.data.content)
 
                 // Посты пользователя

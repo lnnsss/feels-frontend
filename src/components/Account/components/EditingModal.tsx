@@ -2,7 +2,7 @@ import { useState } from "react"
 import Form from "../../UI/Form/Form"
 import LabelInput from "../../UI/LabelInput/LabelInput"
 import axios, { AxiosError } from "axios"
-import { apiURL } from "../../../configs/constants"
+import { apiUsersURL } from "../../../configs/constants"
 import { useStores } from "../../../stores/root-store-context"
 
 export const EditingModal: React.FC = () => {
@@ -43,7 +43,7 @@ export const EditingModal: React.FC = () => {
                 }).filter(([_, value]) => value.trim() !== "")
             );
     
-            const response = await axios.patch(`${apiURL}/users/${id}`, body);
+            const response = await axios.patch(`${apiUsersURL}/${id}`, body);
             setMessage(response.data.message);
             console.log("Профиль успешно обновлён:", response.data);
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiURL } from "../configs/constants";
+import { apiUsersURL } from "../configs/constants";
 import { useStores } from "../stores/root-store-context";
 
 const useSubscription = (subscriptionID: string) => {
@@ -14,7 +14,7 @@ const useSubscription = (subscriptionID: string) => {
     const handleSubscribeUser = async (): Promise<void> => {
         try {
             const response = await axios.patch(
-                `${apiURL}/users/${ourID}/subscribe`, 
+                `${apiUsersURL}/${ourID}/subscribe`,
                 {
                     subscriptionID, 
                 }
@@ -30,7 +30,7 @@ const useSubscription = (subscriptionID: string) => {
     const handleUnsubscribeUser = async (): Promise<void> => {
         try {
             const response = await axios.patch(
-                `${apiURL}/users/${ourID}/unsubscribe`, 
+                `${apiUsersURL}/${ourID}/unsubscribe`,
                 {
                     subscriptionID, 
                 }

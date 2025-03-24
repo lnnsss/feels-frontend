@@ -2,7 +2,7 @@ import s from "./Admin.module.css";
 import { observer } from "mobx-react-lite";
 import { Statistic } from "./components/Statistic";
 import { useEffect, useState } from "react";
-import { apiURL } from "../../configs/constants";
+import { apiPostsURL, apiUsersURL } from "../../configs/constants";
 import axios from "axios";
 
 interface CountResponse {
@@ -19,8 +19,8 @@ export const Admin: React.FC = observer(() => {
         const getCounts = async () => {
             try {
                 const [usersResponse, postsResponse] = await Promise.all([
-                    axios.get<CountResponse>(`${apiURL}/users/count`), 
-                    axios.get<CountResponse>(`${apiURL}/posts/count`),
+                    axios.get<CountResponse>(`${apiUsersURL}/count`),
+                    axios.get<CountResponse>(`${apiPostsURL}/count`),
                 ]);
                 setUsersCount(usersResponse.data.content)
                 setPostsCount(postsResponse.data.content)

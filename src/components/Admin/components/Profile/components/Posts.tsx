@@ -3,7 +3,7 @@ import s from "../Profile.module.css";
 import { observer } from "mobx-react-lite";
 import { usePosts } from "../../../../../hooks/usePosts";
 import axios from "axios";
-import { apiURL } from "../../../../../configs/constants";
+import { apiPostsURL } from "../../../../../configs/constants";
 import { useStores } from "../../../../../stores/root-store-context";
 
 interface PostProps {
@@ -38,7 +38,7 @@ const Post: React.FC<PostProps> = observer(({ id, createdAt, text, color }) => {
   // Удаление поста
   const handleDeletePost = useCallback(async () => {
     try {
-      await axios.delete(`${apiURL}/posts/${id}`);
+      await axios.delete(`${apiPostsURL}/${id}`);
       removePost(id);
     } catch (error) {
       console.error(error)

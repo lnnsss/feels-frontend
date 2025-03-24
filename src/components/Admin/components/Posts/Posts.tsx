@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { usePosts } from "../../../../hooks/usePosts";
 import axios from "axios";
-import { apiURL } from "../../../../configs/constants";
+import { apiPostsURL } from "../../../../configs/constants";
 import { useStores } from "../../../../stores/root-store-context";
 import React from "react";
 
@@ -29,7 +29,7 @@ export const Posts: React.FC = observer(() => {
 
     const handleDeletePost = async (id: string) => {
         try {
-            await axios.delete(`${apiURL}/posts/${id}`);
+            await axios.delete(`${apiPostsURL}/${id}`);
             removePost(id);
         } catch (error) {
             console.error("Ошибка при удалении поста:", error);

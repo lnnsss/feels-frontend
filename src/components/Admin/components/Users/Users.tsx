@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from "react"
 import axios from "axios"
 import s from "./Users.module.css"
-import { apiURL } from "../../../../configs/constants"
+import { apiUsersURL } from "../../../../configs/constants"
 import { User } from "./User"
 import { observer } from "mobx-react-lite"
 import { useStores } from "../../../../stores/root-store-context"
@@ -14,7 +14,7 @@ export const Users: React.FC = observer(() => {
     useEffect(() => {
         const fetch = async () => {
             try {
-                const response = await axios.get(`${apiURL}/users`)
+                const response = await axios.get(apiUsersURL)
                 setUsers(response.data.content)
                 console.log(response.data.message, response.data.content);   
             } catch(err){

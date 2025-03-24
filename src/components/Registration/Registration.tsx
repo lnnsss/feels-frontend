@@ -3,7 +3,7 @@ import s from "./Registration.module.css"
 import Form from "../UI/Form/Form";
 import LabelInput from "../UI/LabelInput/LabelInput";
 import axios, { AxiosError } from "axios";
-import {apiURL} from "../../configs/constants.ts"
+import { apiAuthURL } from "../../configs/constants.ts"
 import { Link, useNavigate } from "react-router-dom";
 import { useStores } from "../../stores/root-store-context.ts";
 import Cookies from "js-cookie";
@@ -44,7 +44,7 @@ export const Registration: React.FC = () => {
                 }
 
                 // запрос на сервер
-                const response = await axios.post(`${apiURL}/auth/registration`, body);
+                const response = await axios.post(`${apiAuthURL}/registration`, body);
                 console.log(response.data);
 
                 // очистка полей

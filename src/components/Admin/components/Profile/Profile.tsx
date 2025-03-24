@@ -3,7 +3,7 @@ import s from "./Profile.module.css";
 import { useProfileInfo } from "../../../../hooks/useProfileInfo";
 import { observer } from "mobx-react-lite";
 import axios from "axios";
-import { apiURL } from "../../../../configs/constants";
+import { apiUsersURL } from "../../../../configs/constants";
 import { Posts } from "./components/Posts";
 import { useStores } from "../../../../stores/root-store-context";
 
@@ -38,7 +38,7 @@ export const Profile: React.FC = observer(() => {
     // Удаление пользователя
     const handleDeleteUser = async (): Promise<void> => {
         try {
-            await axios.delete(`${apiURL}/users/${id}`);
+            await axios.delete(`${apiUsersURL}/${id}`);
             console.log("Пользователь успешно удален!");
             alert("Пользователь успешно удален!");
             navigate('/admin/users');

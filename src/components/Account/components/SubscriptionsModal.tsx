@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import Form from "../../UI/Form/Form";
 import { User } from "../../Users/components/User";
 import axios from "axios";
-import { apiURL } from "../../../configs/constants";
+import { apiUsersURL } from "../../../configs/constants";
 import { useStores } from "../../../stores/root-store-context";
 
 interface User {
@@ -27,7 +27,7 @@ export const SubscriptionsModal: React.FC = observer(() => {
     const loadUsers = async () => {
       try {
         if (subscriptions.length > 0) {
-          const response = await axios.get(`${apiURL}/users/${id}/subscriptions`)
+          const response = await axios.get(`${apiUsersURL}/${id}/subscriptions`)
           setSubs(response.data.content);
         }
       } catch (error) {
