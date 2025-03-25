@@ -3,7 +3,7 @@ import s from "../Chats.module.css"
 import {Link} from "react-router-dom";
 
 interface Props {
-    id: number,
+    id: string,
     avatar: string,
     name: string,
     lastMessage: string
