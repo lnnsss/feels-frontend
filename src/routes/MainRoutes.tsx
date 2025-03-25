@@ -30,6 +30,7 @@ const MainRoutes: React.FC = () => {
             <Route element={<ProtectedRoute isProtected={true} redirectTo="/registration" />}>
                 <Route path="/account" element={<Account />} />
                 <Route path="/chats" element={<Chats />} />
+                <Route path="/chats/:id" element={<Chats />} />
             </Route>
 
             {/* Перенаправление для несуществующих страниц */}
