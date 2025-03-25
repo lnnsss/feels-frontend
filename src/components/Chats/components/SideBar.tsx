@@ -1,6 +1,6 @@
 import React from "react";
 import s from "../Chats.module.css"
-import {User} from "./User.tsx";
+import {User} from "./Message.tsx";
 
 export const SideBar: React.FC = () => {
     const users = [

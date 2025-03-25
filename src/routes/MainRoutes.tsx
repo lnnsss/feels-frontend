@@ -10,6 +10,7 @@ import Account from '../components/Pages/UserPages/AccountPage';
 import NotFound from '../components/Pages/UserPages/NotFoundPage';
 import Profile from "../components/Pages/UserPages/ProfilePage";
 import Chats from "../components/Pages/UserPages/ChatsPage";
+import Chat from "../components/Pages/UserPages/ChatPage.tsx";
 
 const MainRoutes: React.FC = () => {
 
@@ -30,7 +31,7 @@ const MainRoutes: React.FC = () => {
             <Route element={<ProtectedRoute isProtected={true} redirectTo="/registration" />}>
                 <Route path="/account" element={<Account />} />
                 <Route path="/chats" element={<Chats />} />
-                <Route path="/chats/:id" element={<Chats />} />
+                <Route path="/chats/:id" element={<Chat />} />
             </Route>
 
             {/* Перенаправление для несуществующих страниц */}

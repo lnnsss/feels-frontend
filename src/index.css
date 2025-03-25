@@ -73,6 +73,18 @@ main {
   height: 100%;
   flex: 1;
 }
+.main__container {
+  position: relative;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
 img, button {
   user-select: none;
 }

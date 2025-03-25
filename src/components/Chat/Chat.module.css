@@ -1,0 +1,125 @@
+.chat {
+    height: 100%;
+    width: 100%;
+}
+.chat__container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.chat__block {
+    min-height: 60vh;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid var(--black);
+    border-radius: 20px;
+    background-color: var(--white);
+    padding: 0 20px;
+}
+.chat__header {
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.chat__userInfo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.chat__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid var(--black);
+}
+.chat__name {
+    font-size: 24px;
+    font-weight: 500;
+    white-space: nowrap; /* Запрещает перенос строк */
+    overflow: hidden; /* Скрывает выходящий за границы текст */
+    text-overflow: ellipsis; /* Добавляет "..." в конце */
+    max-width: 280px;
+}
+.chat__messages {
+    border: 2px solid var(--black);
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.message {
+    padding: 5px 10px;
+    border: 1px solid var(--black);
+    border-radius: 20px;
+    display: inline-block;
+    max-width: max-content;
+    max-width: 600px;
+}
+.myMessage {
+    background-color: var(--lightGrey);
+    margin-left: auto;
+}
+.chat__footer {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px 0;
+    border-radius: 0 0 20px 20px;
+}
+.chat__footer__input {
+    padding: 10px;
+    border: 2px solid var(--black);
+    border-radius: 20px;
+    flex: 1;
+}
+.chat__footer__btn {
+    padding: 10px;
+    border: 2px solid var(--black);
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/*----media-------------------------------------------*/
+
+@media (max-width: 768px) {
+    .message {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat__name {
+        display: none;
+    }
+    .message {
+        max-width: 200px;
+    }
+    .chat__footer {
+        flex-direction: column;
+    }
+    .chat__footer__input {
+        width: 100%;
+    }
+    .chat__footer__btn {
+        width: 100%;
+    }
+}
