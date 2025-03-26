@@ -43,9 +43,9 @@
 .chat__name {
     font-size: 24px;
     font-weight: 500;
-    white-space: nowrap; /* Запрещает перенос строк */
-    overflow: hidden; /* Скрывает выходящий за границы текст */
-    text-overflow: ellipsis; /* Добавляет "..." в конце */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
     max-width: 280px;
 }
 .chat__messages {
@@ -71,10 +71,12 @@
     display: inline-block;
     max-width: max-content;
     max-width: 600px;
+    margin-right: auto;
 }
 .myMessage {
-    background-color: var(--lightGrey);
+    margin-right: 0;
     margin-left: auto;
+    background-color: var(--lightGrey);
 }
 .chat__footer {
     width: 100%;
