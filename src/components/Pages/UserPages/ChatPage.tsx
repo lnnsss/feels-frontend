@@ -1,18 +1,22 @@
-import React from "react"
+import React from "react";
 import { Helmet } from "react-helmet";
-import {useParams} from "react-router-dom";
-import {Chat} from "../../Chat/Chat.tsx"
+import { Chat } from "../../Chat/Chat.tsx";
+import {useStores} from "../../../stores/root-store-context.ts";
+import {observer} from "mobx-react-lite";
 
-const ChatPage: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+const ChatPage: React.FC = observer(() => {
+    const {
+        chat: {name, lastName}
+    } = useStores()
 
     return (
         <>
             <Helmet>
-                <title>{id}</title>
+                <title>{name} {lastName}</title>
             </Helmet>
             <Chat />
         </>
-    )
-}
-export default ChatPage
+    );
+});
+
+export default ChatPage;

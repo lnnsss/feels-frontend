@@ -7,6 +7,8 @@ import profileStore from "./profile-store";
 import tokenStore from "./token-store";
 import userStore from "./user-store";
 import usersStore from "./users-store";
+import chatsStore from "./chats-store.ts";
+import chatStore from "./chat-store.ts";
 
 class RootStore {
     header = headerStore
@@ -18,6 +20,8 @@ class RootStore {
     token = tokenStore
     user = userStore
     users = usersStore
+    chats = chatsStore
+    chat = chatStore
 }
 
 export default RootStore;
