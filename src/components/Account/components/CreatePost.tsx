@@ -1,5 +1,5 @@
 import s from "./../Account.module.css";
-import { ChangeEvent, useState } from "react";
+import React, {ChangeEvent, useRef, useState} from "react";
 import axios from "axios";
 import {apiPostsURL} from "../../../configs/constants";
 import { useStores } from "../../../stores/root-store-context";
@@ -21,6 +21,7 @@ export const CreatePost: React.FC = () => {
     const [inputValue, setInputValue] = useState<string>("");
     const [colorValue, setColorValue] = useState<string>("#000000");
     const [inputError, setInputError] = useState<boolean>(false);
+    const inputRef = useRef<HTMLInputElement>(null);
     const { 
         post: { addPost },
         token: { getID },
@@ -38,7 +39,6 @@ export const CreatePost: React.FC = () => {
     // Обработка изменения цвета
     const handleChangeColorValue = (e: ChangeEvent<HTMLInputElement>): void => {
         setColorValue(e.target.value);
-        
     };
 
     // Добавление нового поста
@@ -72,6 +72,11 @@ export const CreatePost: React.FC = () => {
 
             await axios.post(`${apiPostsURL}`, body);
 
+            // Возвращаем фокус в input
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
+
             addPost(newPost);
             setInputValue("");
             setInputError(false);
@@ -80,14 +85,23 @@ export const CreatePost: React.FC = () => {
         }
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            e.preventDefault(); // Предотвращаем перенос строки в input
+            handleAddNewPost();
+        }
+    };
+
     return (
         <div className={s.account__createPost}>
             <div className={s.account__createPost__inputs}>
                 <input
+                    ref={inputRef}
                     className={`${s.account__createPost__textInput} ${inputError && s.redOutline}`}
                     type="text"
                     value={inputValue}
                     onChange={handleChangeInputValue}
+                    onKeyDown={handleKeyDown}
                     placeholder="Введите текст"
                 />
                 <input

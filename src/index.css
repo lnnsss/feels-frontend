@@ -47,6 +47,8 @@ p {
 }
 html, body {
   height: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 body {
   font-size: var(--baseFontSize);
