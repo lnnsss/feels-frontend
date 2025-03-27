@@ -1,32 +1,29 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { apiPostsURL, apiUsersURL } from "../configs/constants";
+import { apiUsersURL } from "../configs/constants";
 import { useStores } from "../stores/root-store-context";
+import {Post} from "../stores/profile-store.ts";
 
 export const useAccountInfo = (id: string | undefined) => {
-    const { 
-        post: { setPosts },
-        user: { setName, setLastName, setUserName, setAvatarURL, setStatus, setSubscriptions }
+    const {
+        user: { setName, setLastName, setUserName, setAvatarURL, setStatus, setSubscriptions, setPosts }
     } = useStores(); 
 
     useEffect(() => {
         const fetchAccountInfo = async () => {
             try {
-                const [accountResponse, postsResponse] = await Promise.all([
-                    axios.get(`${apiUsersURL}/${id}`),
-                    axios.get(`${apiPostsURL}?userID=${id}`),
-                ]);
+                const response = await axios.get(`${apiUsersURL}/${id}/idInfo`);
 
-                const { content } = accountResponse.data;
-                setName(content.name);
-                setLastName(content.lastName);
-                setUserName(content.userName);
-                setAvatarURL(content.avatarURL);
-                setStatus(content.status);
-                setSubscriptions(content.subscriptions);
+                const { name, lastName, userName, avatarURL, status, subscriptions, posts } = response.data.content;
+                setName(name);
+                setLastName(lastName);
+                setUserName(userName);
+                setAvatarURL(avatarURL);
+                setStatus(status);
+                setSubscriptions(subscriptions);
 
-                const fetchedPosts = postsResponse.data.content.map((post: any) => ({
-                    name: content.name,
+                const issuedPosts = posts.map((post: Post) => ({
+                    name: name,
                     createdAt: `${new Date(post.createdAt).toLocaleDateString('ru-RU', {
                         year: 'numeric',
                         month: 'long',
@@ -34,12 +31,12 @@ export const useAccountInfo = (id: string | undefined) => {
                     })} ${new Date(post.createdAt).toLocaleTimeString('ru-RU', {
                         hour: '2-digit',
                         minute: '2-digit',
-                        hour12: false, 
+                        hour12: false,
                     })}`,
                     text: post.text,
                     color: post.color
                 }));
-                setPosts(fetchedPosts);
+                setPosts(issuedPosts);
             } catch (err) {
                 console.error(err);
             }

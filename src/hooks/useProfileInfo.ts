@@ -1,43 +1,36 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { apiPostsURL, apiUsersURL } from "../configs/constants";
+import { apiUsersURL } from "../configs/constants";
 import { useStores } from "../stores/root-store-context";
+import {Post} from "../stores/profile-store.ts";
 
 export const useProfileInfo = (userName: string | undefined) => {
-    const { 
-        profilePost: { setPosts },
-        profile: { setID, setName, setLastName, setAvatarURL, setStatus, setSubscriptions, setPostsCount }
+    const {
+        profile: { setID, setName, setLastName, setAvatarURL, setStatus, setSubscriptions, setPosts }
     } = useStores();
 
     useEffect(() => {
-        const fetchAccountInfo = async () => {
+        const fetchProfileInfo = async () => {
             if (!userName) return; 
 
             try {
 
-                // Запросы на получение данных пользователя и его постов
-                const [accountResponse, postsResponse] = await Promise.all([
-                    axios.get(`${apiUsersURL}?userName=${userName}`),
-                    axios.get(`${apiPostsURL}?userName=${userName}`),
-                ]);
+                // Запрос на получение данных пользователя
+                const response = await axios.get(`${apiUsersURL}/${userName}/userNameInfo`);
 
                 // Данные пользователя
-                const { content } = accountResponse.data;          
-                setID(content._id)
-                setName(content.name);
-                setLastName(content.lastName);
-                setAvatarURL(content.avatarURL);
-                setStatus(content.status);
-                setSubscriptions(content.subscriptions);
-
-                // Количество постов пользователя
-                const postsCountResponse = await axios.get(`${apiPostsURL}/count?userID=${content._id}`)
-                setPostsCount(postsCountResponse.data.content)
+                const { _id, name, lastName, avatarURL, status, subscriptions, posts } = response.data.content;
+                setID(_id)
+                setName(name);
+                setLastName(lastName);
+                setAvatarURL(avatarURL);
+                setStatus(status);
+                setSubscriptions(subscriptions);
 
                 // Посты пользователя
-                if ( postsResponse.data.content && postsResponse.data.content.length > 0) {
-                    const fetchedPosts = postsResponse.data.content.map((post: any) => ({
-                        name: content.name,
+                if ( posts.length > 0) {
+                    const issuedPosts = posts.map((post: Post) => ({
+                        name: name,
                         createdAt: `${new Date(post.createdAt).toLocaleDateString('ru-RU', {
                             year: 'numeric',
                             month: 'long',
@@ -50,7 +43,7 @@ export const useProfileInfo = (userName: string | undefined) => {
                         text: post.text,
                         color: post.color
                     }));
-                    setPosts(fetchedPosts);
+                    setPosts(issuedPosts);
                 } else {
                     setPosts([]);
                 }
@@ -60,6 +53,6 @@ export const useProfileInfo = (userName: string | undefined) => {
             }
         };
 
-        fetchAccountInfo();
+        fetchProfileInfo();
     }, [userName]); 
 };

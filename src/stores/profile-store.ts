@@ -1,6 +1,13 @@
 import { makeAutoObservable } from "mobx";
 import { avatarLink } from "../configs/constants";
 
+export interface Post {
+    name: string;
+    createdAt: string;
+    text: string;
+    color: string;
+}
+
 class ProfileStore {
     id: string = "";
     name: string = "";
@@ -8,33 +15,37 @@ class ProfileStore {
     avatarURL: string = avatarLink;
     status: string = "";
     subscriptions: string[] = [];
-    postsCount: number = 0;
+    posts: Post[] = [];
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this);
+    }
+
+    get postsCount(): number {
+        return this.posts.length;
     }
 
     setID = (newID: string): void => {
-        this.id = newID
+        this.id = newID;
     }
     setName = (newName: string): void => {
-        this.name = newName
+        this.name = newName;
     }
     setLastName = (newName: string): void => {
-        this.lastName = newName
+        this.lastName = newName;
     }
-    setAvatarURL = (newName: string): void => {
-        this.avatarURL = newName
+    setAvatarURL = (newURL: string): void => {
+        this.avatarURL = newURL;
     }
-    setStatus = (newName: string): void => {
-        this.status = newName
+    setStatus = (newStatus: string): void => {
+        this.status = newStatus;
     }
-    setSubscriptions = (newSubs: string[]) => {
-        this.subscriptions = newSubs
+    setSubscriptions = (newSubs: string[]): void => {
+        this.subscriptions = newSubs;
     }
-    setPostsCount = (newCount: number) => {
-        this.postsCount = newCount
+    setPosts = (newPosts: Post[]): void => {
+        this.posts = newPosts;
     }
 }
 
-export default new ProfileStore()
+export default new ProfileStore();

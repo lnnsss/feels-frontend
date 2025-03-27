@@ -4,9 +4,8 @@ import { PostProps } from "./CreatePost";
 import { useStores } from "../../../stores/root-store-context";
 
 export const Posts: React.FC = observer(() => {
-    const { 
-        post: { posts },
-        user: { name }
+    const {
+        user: { name, posts }
     } = useStores(); 
 
     return (

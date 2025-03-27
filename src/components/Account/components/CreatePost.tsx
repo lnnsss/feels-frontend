@@ -22,10 +22,9 @@ export const CreatePost: React.FC = () => {
     const [colorValue, setColorValue] = useState<string>("#000000");
     const [inputError, setInputError] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement>(null);
-    const { 
-        post: { addPost },
+    const {
         token: { getID },
-        user: { name }
+        user: { name, addPost }
     } = useStores();
     
     const id = getID();

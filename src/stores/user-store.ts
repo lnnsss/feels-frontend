@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { avatarLink } from "../configs/constants";
+import { Post } from "./profile-store.ts";
 
 class UserStore {
     name: string = "";
@@ -8,6 +9,7 @@ class UserStore {
     avatarURL: string = avatarLink;
     status: string = "";
     subscriptions: string[] = [];
+    posts: Post[] = [];
 
     constructor() {
         makeAutoObservable(this)
@@ -28,12 +30,14 @@ class UserStore {
     setStatus = (newName: string): void => {
         this.status = newName
     }
-
     setSubscriptions = (newSubs: string[]) => {
         this.subscriptions = newSubs
     }
-    addSubscription = (newSub: string) => {
-        this.subscriptions = [...this.subscriptions, newSub]
+    setPosts = (newPosts: Post[]) => {
+        this.posts = newPosts
+    }
+    addPost = (newPost: Post): void => {
+        this.posts = [...this.posts, newPost]
     }
 
     clear = () => {

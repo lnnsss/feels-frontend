@@ -10,9 +10,8 @@ export interface PostProps {
 }
 
 export const Posts: React.FC = observer( () => {
-    const { 
-        profilePost: { posts },
-        profile: {name}
+    const {
+        profile: {name, posts}
     } = useStores();
 
     return (

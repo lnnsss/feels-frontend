@@ -1,12 +1,11 @@
 import { makeAutoObservable } from "mobx";
 
 interface User {
+    id: string
     userName: string,
     name: string,
     lastName: string,
-    avatarURL: string,
-    status: string,
-    subscriptions: string[],
+    avatarURL: string
 }
 
 class UsersStore {

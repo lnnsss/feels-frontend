@@ -10,10 +10,9 @@ import { avatarLink } from "../../configs/constants";
 
 export const Account: React.FC = observer(() => {
     const { 
-        modal: { setEditingModalActive, setAccountAvatarModalActive, setSubscribtionsModalActive }, 
-        post: { setPosts },
+        modal: { setEditingModalActive, setAccountAvatarModalActive, setSubscribtionsModalActive },
         token: { clearToken, getID },
-        user: { name, lastName, userName, avatarURL, status, subscriptions, clear }
+        user: { name, lastName, userName, avatarURL, status, subscriptions, setPosts, clear }
     } = useStores();
     const navigate = useNavigate();
     const id = getID();
