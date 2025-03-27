@@ -6,6 +6,7 @@ import { Posts } from "./components/Posts";
 import { CreatePost } from "./components/CreatePost";
 import { useAccountInfo } from "../../hooks/useAccountInfo";
 import { useStores } from "../../stores/root-store-context";
+import { avatarLink } from "../../configs/constants";
 
 export const Account: React.FC = observer(() => {
     const { 
@@ -40,7 +41,7 @@ export const Account: React.FC = observer(() => {
     };
 
     // Аватар пользователя
-    const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
+    const ava = avatarURL.length ? avatarURL : avatarLink;
 
     return (
         <div className={s.account}>
