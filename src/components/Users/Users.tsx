@@ -23,15 +23,12 @@ export const Users: React.FC = observer(() => {
                     if (id) { // проверяем авторизован ли пользователь
                         const response = await axios.get(`${apiUsersURL}/${id}/subscriptions`)
                         setUsers(response.data.content)
-                        console.log(response.data.message, response.data.content);  
                     } else {
                         setUsers([])
-                        console.log("Пользователь не авторизован"); 
                     }
                 } else { // получаем всех пользователей
                     const response = await axios.get(apiUsersURL)
                     setUsers(response.data.content)
-                    console.log(response.data.message, response.data.content);   
                 } 
             } catch(err){
                 console.error("Ошибка при получении пользователей", err);

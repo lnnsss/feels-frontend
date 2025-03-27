@@ -45,7 +45,6 @@ export const EditingModal: React.FC = () => {
     
             const response = await axios.patch(`${apiUsersURL}/${id}`, body);
             setMessage(response.data.message);
-            console.log("Профиль успешно обновлён:", response.data);
 
             // Обновляем профиль значениями из непустых полей
             if (body.name) setNameUser(body.name);

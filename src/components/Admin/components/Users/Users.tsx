@@ -16,7 +16,6 @@ export const Users: React.FC = observer(() => {
             try {
                 const response = await axios.get(apiUsersURL)
                 setUsers(response.data.content)
-                console.log(response.data.message, response.data.content);   
             } catch(err){
                 console.error("Ошибка при получении пользователей", err);
             }

@@ -16,7 +16,6 @@ export const Chat: React.FC = observer(() => {
     const id = getID()
 
     useEffect(() => {
-        console.log(chatID)
         fetchChat(chatID?.toString());
     }, [fetchChat]);
 

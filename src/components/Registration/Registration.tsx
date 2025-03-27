@@ -45,7 +45,6 @@ export const Registration: React.FC = () => {
 
                 // запрос на сервер
                 const response = await axios.post(`${apiAuthURL}/registration`, body);
-                console.log(response.data);
 
                 // очистка полей
                 setName("")

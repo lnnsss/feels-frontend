@@ -32,7 +32,6 @@ export const Login: React.FC = () => {
 
                 // запрос на сервер
                 const response = await axios.post(`${apiAuthURL}/login`, body);
-                console.log(response.data);
 
                 // очистка полей
                 setEmail("")

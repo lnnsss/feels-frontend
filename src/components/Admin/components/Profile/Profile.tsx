@@ -39,7 +39,6 @@ export const Profile: React.FC = observer(() => {
     const handleDeleteUser = async (): Promise<void> => {
         try {
             await axios.delete(`${apiUsersURL}/${id}`);
-            console.log("Пользователь успешно удален!");
             alert("Пользователь успешно удален!");
             navigate('/admin/users');
         } catch (err) {

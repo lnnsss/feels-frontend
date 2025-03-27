@@ -20,7 +20,6 @@ const useSubscription = (subscriptionID: string) => {
                 }
             );
             setSubscriptions(response.data.content);
-            console.log("Подписка успешно оформлена:", response.data.content);
         } catch (err) {
             console.error("Ошибка при попытке подписки:", err);
         }
@@ -36,7 +35,6 @@ const useSubscription = (subscriptionID: string) => {
                 }
             );
             setSubscriptions(response.data.content);
-            console.log("Успешная отписка:", response.data.content);
         } catch (err) {
             console.error("Ошибка при попытке отписки:", err);
         }
