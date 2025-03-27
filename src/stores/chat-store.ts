@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
 import TokenStore from "./token-store.ts";
-import { apiChatsURL } from "../configs/constants.ts";
+import { apiChatsURL, avatarLink } from "../configs/constants.ts";
 
 export interface MessageProps {
     userID: string;
@@ -14,7 +14,7 @@ class ChatStore {
     name: string = "";
     lastName: string = "";
     avatarURL: string =
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
+        avatarLink;
     messages: MessageProps[] = [];
 
     constructor() {
@@ -48,7 +48,7 @@ class ChatStore {
                 this.userName = userName;
                 this.name = name;
                 this.lastName = lastName;
-                this.avatarURL = avatarURL;
+                this.avatarURL = avatarURL || avatarLink;
                 this.messages = messages;
             });
         } catch (error) {
