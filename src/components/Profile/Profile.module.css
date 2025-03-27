@@ -94,6 +94,11 @@
   font-size: 16px;
   text-align: justify;
 }
+.profile__buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 .profile__button {
   margin-top: 10px; 
   display: flex;
@@ -115,4 +120,13 @@
   background-color: var(--black);
   color: var(--white);
   filter: none;
+}
+
+/*----media-------------------------------------------*/
+
+@media (max-width: 480px) {
+  .profile__buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
