@@ -18,7 +18,11 @@ export const Chats: React.FC = observer(() => {
             <div className={`__container ${s.chats__container}`}>
                 <div className={s.messages}>
                     <header className={s.messages__header}>Сообщения</header>
-                    {chats.map((c) => <Message key={c.id} chatID={c.chatID} avatar={c.avatar} name={c.name} lastMessage={c.lastMessage} />)}
+                    {
+                        chats.length 
+                        ? chats.map((c) => <Message key={c.id} chatID={c.chatID} avatar={c.avatar} name={c.name} lastMessage={c.lastMessage} />) 
+                        : <span className={s.noChat}>Пусто</span>
+                    }
                 </div>
             </div>
         </div>
