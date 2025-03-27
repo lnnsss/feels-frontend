@@ -1,10 +1,11 @@
 import { makeAutoObservable } from "mobx";
+import { avatarLink } from "../configs/constants";
 
 class ProfileStore {
     id: string = "";
     name: string = "";
     lastName: string = "";
-    avatarURL: string = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
+    avatarURL: string = avatarLink;
     status: string = "";
     subscriptions: string[] = [];
     postsCount: number = 0;
