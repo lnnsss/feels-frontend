@@ -1,10 +1,11 @@
 import { makeAutoObservable } from "mobx";
+import { avatarLink } from "../configs/constants";
 
 class UserStore {
     name: string = "";
     lastName: string = "";
     userName: string = "";
-    avatarURL: string = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
+    avatarURL: string = avatarLink;
     status: string = "";
     subscriptions: string[] = [];
 
@@ -39,7 +40,7 @@ class UserStore {
         this.name = ""
         this.lastName = ""
         this.userName = ""
-        this.avatarURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s"
+        this.avatarURL = avatarLink
         this.status = ""
         this.subscriptions = []
     }
