@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import s from "../Users.module.css"
 import { observer } from "mobx-react-lite";
+import { avatarLink } from "../../../configs/constants";
 
 interface User {
     userName: string,
@@ -12,7 +13,7 @@ interface User {
 export const User: React.FC<User> = observer(({userName, name, lastName, avatarURL}) => {
 
     // Аватар пользователя
-    const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
+    const ava = avatarURL.length ? avatarURL : avatarLink;
 
     return (
         <Link to={`/users/${userName}`} className={s.users__block}>
