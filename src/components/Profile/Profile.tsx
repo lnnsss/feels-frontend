@@ -7,6 +7,7 @@ import React from "react";
 import { SubscribeButtons } from "./components/SubscribeButtons";
 import { useStores } from "../../stores/root-store-context";
 import { ChatButton } from "./components/ChatButton";
+import { avatarLink } from "../../configs/constants";
 
 export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
@@ -21,7 +22,7 @@ export const Profile: React.FC = observer(() => {
     useProfileInfo(userName);
 
     // Аватар
-    const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
+    const ava = avatarURL.length ? avatarURL : avatarLink;
 
     // Копировать юзернейм нажатием
     const handleUserNameClick = async (): Promise<void> => {
