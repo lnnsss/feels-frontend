@@ -74,3 +74,9 @@
 .message__lastMessage {
     font-size: 16px;
 }
+.noChat {
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--grey);
+    padding: 20px;
+}
