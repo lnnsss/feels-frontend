@@ -6,6 +6,7 @@ import { Posts } from "./components/Posts";
 import React from "react";
 import { SubscribeButtons } from "./components/SubscribeButtons";
 import { useStores } from "../../stores/root-store-context";
+import { ChatButton } from "./components/ChatButton";
 
 export const Profile: React.FC = observer(() => {
     const { userName } = useParams<{ userName: string }>();
@@ -51,7 +52,12 @@ export const Profile: React.FC = observer(() => {
                     <h3 className={s.profile__status}>{status}</h3>
                     <h4 className={s.profile__subscribes}>Подписки: {profileSubscriptions.length}</h4>
                     <h4 className={s.profile__postsCount}>Постов: {postsCount}</h4>
-                    {ourID != id && token && <SubscribeButtons userId={id} />}
+                    {ourID != id && token && (
+                        <div className={s.profile__buttons}>
+                            <SubscribeButtons userId={id} />
+                            <ChatButton id={id} />
+                        </div>
+                        )}
                 </div>
                 <Posts />
             </div>
