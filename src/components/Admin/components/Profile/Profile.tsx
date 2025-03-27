@@ -3,7 +3,7 @@ import s from "./Profile.module.css";
 import { useProfileInfo } from "../../../../hooks/useProfileInfo";
 import { observer } from "mobx-react-lite";
 import axios from "axios";
-import { apiUsersURL } from "../../../../configs/constants";
+import { apiUsersURL, avatarLink } from "../../../../configs/constants";
 import { Posts } from "./components/Posts";
 import { useStores } from "../../../../stores/root-store-context";
 
@@ -18,7 +18,7 @@ export const Profile: React.FC = observer(() => {
     useProfileInfo(userName);
 
     // Аватар
-    const ava = avatarURL.length ? avatarURL : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQncwmjK9JtQBeWuoCPkioKY3gsv4l7L7_Egw&s";
+    const ava = avatarURL.length ? avatarURL : avatarLink;
 
     // Копировать юзернейм нажатием
     const handleUserNameClick = async (): Promise<void> => {
