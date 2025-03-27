@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import axios from "axios";
 import TokenStore from "./token-store.ts";
-import { apiChatsURL } from "../configs/constants.ts";
+import { apiChatsURL, avatarLink } from "../configs/constants.ts";
 
 export interface MessageProps {
     chatID: string
@@ -42,7 +42,7 @@ class ChatsStore {
             this.chats = response.data.content.map(chat => ({
                 chatID: chat.chatID,
                 id: chat.id,
-                avatar: chat.avatarURL || "",
+                avatar: chat.avatarURL || avatarLink,
                 name: chat.name || "Неизвестный",
                 lastName: chat.lastName || "",
                 lastMessage: chat.lastMessage || "",
