@@ -74,15 +74,13 @@ class ChatStore {
                     },
                 }
             );
-
-            if (!response.data || !response.data.message) {
-                console.error("Некорректный ответ от сервера", response.data);
-                return;
+            const id = TokenStore.getID();
+            const newMessage: MessageProps = {
+                userID: id,
+                text
             }
 
-            runInAction(() => {
-                this.messages.push(response.data.message);
-            });
+            this.messages = [...this.messages, newMessage]
         } catch (error) {
             console.error("Ошибка при отправке сообщения:", error);
         }
