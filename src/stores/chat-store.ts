@@ -13,12 +13,11 @@ class ChatStore {
     userName: string = "";
     name: string = "";
     lastName: string = "";
-    avatarURL: string =
-        avatarLink;
+    avatarURL: string = avatarLink;
     messages: MessageProps[] = [];
 
     constructor() {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {}, { autoBind: true });
     }
 
     fetchChat = async (chatID: string) => {
@@ -42,8 +41,7 @@ class ChatStore {
             }
 
             runInAction(() => {
-                const { userID, userName, name, lastName, avatarURL, messages } =
-                    response.data.content;
+                const { userID, userName, name, lastName, avatarURL, messages } = response.data.content;
                 this.userID = userID;
                 this.userName = userName;
                 this.name = name;
@@ -64,7 +62,7 @@ class ChatStore {
                 return;
             }
 
-            const response = await axios.post(
+            await axios.post(
                 `${apiChatsURL}/${chatID}/message`,
                 { text },
                 {
@@ -74,13 +72,6 @@ class ChatStore {
                     },
                 }
             );
-            const id = TokenStore.getID();
-            const newMessage: MessageProps = {
-                userID: id,
-                text
-            }
-
-            this.messages = [...this.messages, newMessage]
         } catch (error) {
             console.error("Ошибка при отправке сообщения:", error);
         }
